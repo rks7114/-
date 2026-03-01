@@ -1,105 +1,146 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자마공 소개 홈페이지</title>
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fdfdfd;
-            color: #333;
-        }
-        header {
-            background-color: #24292e;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-        section h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        footer {
-            background-color: #24292e;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-        }
-        .logo {
-            width: 100px;
-            margin: 20px auto;
-        }
-        iframe {
-            margin-top: 30px;
-            max-width: 90%;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>잼공 재팬 | 반응형 프리미엄 포털</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
 </head>
-<body>
-    <header>
-        <img src="https://jamgong.com/assets/logo.png" alt="자마공 로고" class="logo">
-        <h1>자마공 콘텐츠 센터</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#services">서비스</a></li>
-                <li><a href="#contact">문의</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="lang-ko">
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn active" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
 
-    <section id="about">
-        <h2>자마공이란?</h2>
-        <p>불교 철학과 AI 자동화가 만나는 콘텐츠 실험실. 유튜브, 블로그, 자동화 도구를 통해 삶을 성찰하는 이야기를 전합니다.</p>
+  <header class="hero dashboard-hero">
+    <p class="eyebrow">JAMGONG JAPAN · RESPONSIVE PREMIUM PORTAL</p>
+    <h1>
+      <span class="lang-block ko">잼공 재팬 반응형 프리미엄 포털</span>
+      <span class="lang-block ja"><ruby>ジャムゴン<rt>じゃむごん</rt></ruby><ruby>ジャパン<rt>じゃぱん</rt></ruby><ruby>対応型<rt>たいおうがた</rt></ruby>プレミアムポータル</span>
+      <span class="lang-block zh"><ruby>匠工日本<rt>jiàng gōng rì běn</rt></ruby><ruby>响应式高级门户<rt>xiǎng yìng shì gāo jí mén hù</rt></ruby></span>
+    </h1>
+    <p class="hero-copy">
+      <span class="lang-block ko">모바일은 한 손 조작 UI, PC는 3분할 문서 검토 + A4 미리보기</span>
+      <span class="lang-block ja"><ruby>モバイル<rt>もばいる</rt></ruby>は<ruby>片手操作<rt>かたてそうさ</rt></ruby>UI、PCは3<ruby>分割検討<rt>ぶんかつけんとう</rt></ruby>+A4<ruby>表示<rt>ひょうじ</rt></ruby></span>
+      <span class="lang-block zh"><ruby>移动端单手操作<rt>yí dòng duān dān shǒu cāo zuò</rt></ruby>，PC<ruby>三栏对照<rt>sān lán duì zhào</rt></ruby>+A4<ruby>预览<rt>yù lǎn</rt></ruby></span>
+    </p>
+    <div class="oracle-strip" aria-live="polite">
+      <p class="lang-block ko">실시간 알림: <strong id="oracle-time-ko">--:--</strong> 기준, 비자 사유서 초안을 점검하세요.</p>
+      <p class="lang-block ja"><ruby>リアルタイム通知<rt>りあるたいむつうち</rt></ruby>：<strong id="oracle-time-ja">--:--</strong><ruby>時点<rt>じてん</rt></ruby>でビザ<ruby>理由書<rt>りゆうしょ</rt></ruby><ruby>草案<rt>そうあん</rt></ruby>を<ruby>点検<rt>てんけん</rt></ruby>してください。</p>
+      <p class="lang-block zh"><ruby>实时提醒<rt>shí shí tí xǐng</rt></ruby>：<strong id="oracle-time-zh">--:--</strong><ruby>时点<rt>shí diǎn</rt></ruby><ruby>检查签证说明书草稿<rt>jiǎn chá qiān zhèng shuō míng shū cǎo gǎo</rt></ruby>。</p>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard card-grid" aria-label="9대 핵심 카테고리">
+      <a class="card-link premium-trigger" href="admin-secretary.html" data-open-modal="#index-pay-modal">
+        <article class="card premium-admin">
+          <p class="premium-badge">PREMIUM AI · ¥3,000</p>
+          <h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.3 6.7L21 11l-6.7 2.3L12 20l-2.3-6.7L3 11l6.7-2.3z"/></svg></span> <span class="lang-block ko">1. 행정비서</span><span class="lang-block ja">1. <ruby>行政<rt>ぎょうせい</rt></ruby><ruby>支援<rt>しえん</rt></ruby></span><span class="lang-block zh">1. <ruby>行政<rt>xíngzhèng</rt></ruby><ruby>助理<rt>zhùlǐ</rt></ruby></span></h2>
+          <p><span class="lang-block ko">AI 비자 사유서 자동 생성</span><span class="lang-block ja"><ruby>AI<rt>えーあい</rt></ruby>ビザ<ruby>理由書<rt>りゆうしょ</rt></ruby><ruby>自動作成<rt>じどうさくせい</rt></ruby></span><span class="lang-block zh"><ruby>AI签证说明书<rt>AI qiānzhèng shuōmíngshū</rt></ruby><ruby>自动生成<rt>zìdòng shēngchéng</rt></ruby></span></p>
+        </article>
+      </a>
+      <a class="card-link" href="safe-housing.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5L12 4l8 6.5V20H4z"/><path d="M10 20v-5h4v5"/></svg></span> <span class="lang-block ko">2. 안심주거</span><span class="lang-block ja">2. <ruby>安心住居<rt>あんしんじゅうきょ</rt></ruby></span><span class="lang-block zh">2. <ruby>安心住房<rt>ānxīn zhùfáng</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="asset-guide.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 9-9 9-9-9z"/></svg></span> <span class="lang-block ko">3. 자산가이드</span><span class="lang-block ja">3. <ruby>資産案内<rt>しさんあんない</rt></ruby></span><span class="lang-block zh">3. <ruby>资产指南<rt>zīchǎn zhǐnán</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="emergency-rescue.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v18"/><path d="M8 4h10l-2 4 2 4H8z"/></svg></span> <span class="lang-block ko">4. 긴급구조</span><span class="lang-block ja">4. <ruby>緊急救助<rt>きんきゅうきゅうじょ</rt></ruby></span><span class="lang-block zh">4. <ruby>紧急救助<rt>jǐnjí jiùzhù</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="digital-help.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16H7z"/><path d="M10 7h4M10 17h4"/></svg></span> <span class="lang-block ko">5. 생활편의</span><span class="lang-block ja">5. <ruby>生活便利<rt>せいかつべんり</rt></ruby></span><span class="lang-block zh">5. <ruby>生活便利<rt>shēnghuó biànlì</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="roadmaster.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M14 7l6 5-6 5"/></svg></span> <span class="lang-block ko">6. 로드마스터</span><span class="lang-block ja">6. <ruby>行動指針<rt>こうどうししん</rt></ruby></span><span class="lang-block zh">6. <ruby>路线总览<rt>lùxiàn zǒnglǎn</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="practical-conversation.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span> <span class="lang-block ko">7. 실무회화</span><span class="lang-block ja">7. <ruby>実務会話<rt>じつむかいわ</rt></ruby></span><span class="lang-block zh">7. <ruby>实务会话<rt>shíwù huìhuà</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="homeland-connect.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12c2-4 6-4 8 0s6 4 12 0"/></svg></span> <span class="lang-block ko">8. 본국연결</span><span class="lang-block ja">8. <ruby>本国連携<rt>ほんごくれんけい</rt></ruby></span><span class="lang-block zh">8. <ruby>本国连接<rt>běnguó liánjiē</rt></ruby></span></h2></article></a>
+      <a class="card-link" href="future-planning.html"><article class="card"><h2><span class="icon-gold" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg></span> <span class="lang-block ko">9. 미래설계</span><span class="lang-block ja">9. <ruby>未来設計<rt>みらいせっけい</rt></ruby></span><span class="lang-block zh">9. <ruby>未来规划<rt>wèi lái guī huà</rt></ruby></span></h2></article></a>
     </section>
 
-    <section id="services">
-        <h2>주요 콘텐츠</h2>
-        <ul>
-            <li>불교 스토리텔링 영상 제작</li>
-            <li>AI 비서 자동화 시스템 구축</li>
-            <li>법화경 사경 콘텐츠 기획</li>
-        </ul>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/PZ7lDrZFtZ0" title="자마공 소개 영상" allowfullscreen></iframe>
-    </section>
+    <section class="desktop-workbench" aria-label="desktop editor">
+      <div class="workbench-head">
+        <h2>
+          <span class="lang-block ko">와이드 문서 편집 스테이션</span>
+          <span class="lang-block ja"><ruby>ワイド文書編集<rt>わいどぶんしょへんしゅう</rt></ruby>ステーション</span>
+          <span class="lang-block zh"><ruby>宽屏文书编辑台<rt>kuān píng wén shū biān jí tái</rt></ruby></span>
+        </h2>
+        <div class="sync-state" id="sync-state">Cloud Sync: Standby</div>
+      </div>
 
-    <section id="contact">
-        <h2>문의하기</h2>
-        <p>📧 이메일: hello@jamgong.com</p>
-        <p>📄 신청서: <a href="https://tally.so/forms" target="_blank">Tally 신청 바로가기</a></p>
-    </section>
+      <div class="tri-compare">
+        <article class="doc-pane ko-pane">
+          <h3>KR</h3>
+          <label for="doc-ko">한국어 초안</label>
+          <textarea id="doc-ko" class="doc-input" placeholder="비자 사유서 한국어 초안을 입력하세요."></textarea>
+        </article>
+        <article class="doc-pane ja-pane">
+          <h3>JP</h3>
+          <label for="doc-ja"><ruby>日本語草案<rt>にほんごそうあん</rt></ruby></label>
+          <textarea id="doc-ja" class="doc-input" placeholder="<ruby>日本語草案<rt>にほんごそうあん</rt></ruby>を入力してください。"></textarea>
+        </article>
+        <article class="doc-pane zh-pane">
+          <h3>CN</h3>
+          <label for="doc-zh"><ruby>中文草稿<rt>zhōng wén cǎo gǎo</rt></ruby></label>
+          <textarea id="doc-zh" class="doc-input" placeholder="请输入中文草稿。"></textarea>
+        </article>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 Jamgong. All rights reserved.</p>
-    </footer>
+      <div class="print-controls">
+        <button class="action-btn" type="button" id="refresh-a4">A4 미리보기 갱신</button>
+        <button class="gold-cta print-btn" type="button" id="print-a4">A4 인쇄</button>
+      </div>
+
+      <section class="a4-preview-wrap">
+        <article class="a4-sheet" id="a4-preview">
+          <h3>JAMGONG JAPAN · A4 Preview</h3>
+          <div class="a4-grid">
+            <section>
+              <h4>KO</h4>
+              <p id="a4-ko"></p>
+            </section>
+            <section>
+              <h4>JP</h4>
+              <p id="a4-ja"></p>
+            </section>
+            <section>
+              <h4>CN</h4>
+              <p id="a4-zh"></p>
+            </section>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <div class="index-action-bar" aria-label="결제 액션 바">
+    <button class="premium-banner-btn gold-cta" type="button" data-open-modal="#index-pay-modal">
+      <span class="lang-block ko">AI 비자 사유서 자동 생성 시작</span>
+      <span class="lang-block ja"><ruby>AI<rt>えーあい</rt></ruby>ビザ<ruby>理由書<rt>りゆうしょ</rt></ruby><ruby>自動作成<rt>じどうさくせい</rt></ruby>を<ruby>開始<rt>かいし</rt></ruby></span>
+      <span class="lang-block zh"><ruby>开始AI签证说明书自动生成<rt>kāi shǐ AI qiānzhèng shuōmíngshū zìdòng shēngchéng</rt></ruby></span>
+    </button>
+  </div>
+
+  <div id="index-pay-modal" class="pay-modal" hidden>
+    <div class="pay-modal-card" role="dialog" aria-modal="true" aria-labelledby="index-pay-title">
+      <h3 id="index-pay-title">AI 비자 사유서 자동 생성 결제</h3>
+      <p>
+        <span class="lang-block ko">PayPay 또는 카드 결제로 이용할 수 있습니다.</span>
+        <span class="lang-block ja">PayPayまたはカード<ruby>決済<rt>けっさい</rt></ruby>で<ruby>利用可能<rt>りようかのう</rt></ruby>です。</span>
+        <span class="lang-block zh"><ruby>可通过PayPay或信用卡支付使用<rt>kě tōng guò PayPay huò xìnyòngkǎ zhīfù shǐyòng</rt></ruby>。</span>
+      </p>
+      <div class="payment-row"><button class="pay-btn paypay" type="button">PayPay</button><button class="pay-btn card" type="button">Credit Card</button></div>
+      <div class="action-row"><button class="action-btn" type="button" data-close-modal>닫기</button></div>
+    </div>
+  </div>
+
+  <footer class="partner-slot biz-footer">
+    <p class="biz-title">JAMGONG KOREA Co., Ltd.</p>
+    <p>
+      <span class="lang-block ko">한국 사업자 정보: 사업자등록번호 · 통신판매업 신고 · 고객지원 센터</span>
+      <span class="lang-block ja"><ruby>韓国事業者情報<rt>かんこくじぎょうしゃじょうほう</rt></ruby>：<ruby>事業者登録番号<rt>じぎょうしゃとうろくばんごう</rt></ruby>・<ruby>通信販売届出<rt>つうしんはんばいとどけで</rt></ruby>・<ruby>顧客支援<rt>こきゃくしえん</rt></ruby></span>
+      <span class="lang-block zh"><ruby>韩国企业信息<rt>hán guó qǐ yè xìn xī</rt></ruby>：<ruby>营业登记号<rt>yíng yè dēng jì hào</rt></ruby>·<ruby>电商备案<rt>diàn shāng bèi àn</rt></ruby>·<ruby>客服中心<rt>kè fú zhōng xīn</rt></ruby></span>
+    </p>
+    <div class="payment-logos" aria-label="global payments">
+      <span>PayPay</span><span>VISA</span><span>Mastercard</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
