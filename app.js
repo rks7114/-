@@ -54,6 +54,40 @@
     }
   }
 
+
+  function ensureDesktopSidebar() {
+    if (!document.body || document.querySelector('.pc-sidebar')) return;
+    const sidebar = document.createElement('aside');
+    sidebar.className = 'pc-sidebar';
+    sidebar.innerHTML = `
+      <h2 class="pc-sidebar-title">JAMGONG JAPAN</h2>
+      <nav class="pc-sidebar-menu" aria-label="Desktop menu">
+        <a href="index.html">대시보드</a>
+        <a href="admin-secretary.html">1. 행정비서</a>
+        <a href="safe-housing.html">2. 안심주거</a>
+        <a href="asset-guide.html">3. 자산가이드</a>
+        <a href="emergency-rescue.html">4. 긴급구조</a>
+        <a href="digital-help.html">5. 생활편의</a>
+        <a href="roadmaster.html">6. 로드마스터</a>
+        <a href="practical-conversation.html">7. 실무회화</a>
+        <a href="homeland-connect.html">8. 본국연결</a>
+        <a href="future-planning.html">9. 미래설계</a>
+        <a href="checklist-generator.html">체크리스트</a>
+      </nav>
+    `;
+    document.body.appendChild(sidebar);
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      document.body.classList.add('with-pc-sidebar');
+    }
+
+    const media = window.matchMedia('(min-width: 1024px)');
+    const applyDesktopState = (e) => {
+      document.body.classList.toggle('with-pc-sidebar', e.matches);
+    };
+    applyDesktopState(media);
+    media.addEventListener('change', applyDesktopState);
+  }
+
   function updateJapanClock() {
     const tokyo = new Intl.DateTimeFormat('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' }).format(new Date());
     ['jp-time-ko', 'jp-time-ja', 'jp-time-zh'].forEach((id) => {
@@ -63,6 +97,7 @@
   }
 
   ensureGlobalUi();
+  ensureDesktopSidebar();
   updateJapanClock();
   setInterval(updateJapanClock, 30000);
 
