@@ -88,6 +88,13 @@
     };
     applyDesktopState(media);
     media.addEventListener('change', applyDesktopState);
+
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    sidebar.querySelectorAll('.pc-sidebar-menu a').forEach((link) => {
+      const isActive = link.getAttribute('href') === currentPage;
+      link.classList.toggle('active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+    });
   }
 
 
@@ -105,6 +112,13 @@
       </div>
     `;
     document.body.appendChild(bar);
+
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    bar.querySelectorAll('.pc-top-menu-inner a').forEach((link) => {
+      const isActive = link.getAttribute('href') === currentPage;
+      link.classList.toggle('active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+    });
   }
 
   function updateJapanClock() {

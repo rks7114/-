@@ -2417,6 +2417,12 @@ body:not(.home) .content-card {
     transform: translateY(-1px);
   }
 
+  .pc-top-menu-inner a.active {
+    border-color: #ffb800;
+    background: linear-gradient(120deg, #173d60, #1f4f7b);
+    color: #fff9df;
+  }
+
   .pc-sidebar {
     display: block;
     position: fixed;
@@ -2459,6 +2465,13 @@ body:not(.home) .content-card {
   .pc-sidebar-menu a:hover {
     border-color: #ffb800;
     transform: translateY(-1px);
+  }
+
+  .pc-sidebar-menu a.active {
+    border-color: #ffb800;
+    background: linear-gradient(120deg, #173857, #23537f);
+    box-shadow: inset 0 0 0 1px rgba(255, 214, 118, 0.35);
+    color: #fff9df;
   }
 
 
@@ -2551,6 +2564,44 @@ body:not(.home) .content-card {
     padding-left: 1.6rem;
     padding-right: 1.6rem;
   }
+
+
+  .hero,
+  .golden-streamline-header,
+  .conversation-hero,
+  .emergency-hero,
+  .digital-hero,
+  .homeland-hero,
+  .future-hero,
+  .housing-hero,
+  .asset-hero,
+  .admin-hero {
+    max-width: none;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-bottom-left-radius: 34px;
+    border-bottom-right-radius: 34px;
+  }
+
+  .card,
+  .principles,
+  .content-card,
+  .premium-card,
+  .workflow-card,
+  .finance-card,
+  .lifeline-card,
+  .garbage-card,
+  .conv-card,
+  .home-card,
+  .docs-card,
+  .timeline-card,
+  .alert-card,
+  .em-card,
+  .app-card {
+    line-height: 1.74;
+    padding: clamp(1.05rem, 1.15vw, 1.4rem);
+  }
   .dashboard,
   .workflow-grid,
   .finance-grid,
@@ -2564,7 +2615,7 @@ body:not(.home) .content-card {
   .housing-check-grid,
   .asset-grid,
   .menu-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
   }
 
   .card,
@@ -2605,6 +2656,31 @@ body:not(.home) .content-card {
     border-color: #ffb800;
     box-shadow: 0 14px 32px rgba(0, 31, 63, 0.2);
     transform: translateY(-2px);
+  }
+
+
+  .dashboard,
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  }
+
+  .dashboard-main,
+  .partner-slot,
+  .index-action-bar {
+    max-width: 1480px;
+  }
+
+  .index-action-bar {
+    left: auto;
+    right: 1.25rem;
+    bottom: 1.15rem;
+    transform: none;
+    width: min(420px, calc(100vw - 320px));
+  }
+
+  .sos-fab {
+    right: 1.25rem;
+    bottom: 8.2rem;
   }
 
   .mobile-bottom-nav {
