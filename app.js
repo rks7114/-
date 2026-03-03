@@ -71,8 +71,6 @@
         <a href="roadmaster.html">6. 로드마스터</a>
         <a href="practical-conversation.html">7. 실무회화</a>
         <a href="homeland-connect.html">8. 본국연결</a>
-        <a href="future-planning.html">9. 미래설계</a>
-        <a href="checklist-generator.html">체크리스트</a>
       </nav>
     `;
     document.body.appendChild(sidebar);
@@ -88,6 +86,22 @@
     media.addEventListener('change', applyDesktopState);
   }
 
+
+
+  function ensurePcTopMenu() {
+    if (!document.body || document.querySelector('.pc-top-menu')) return;
+    const bar = document.createElement('div');
+    bar.className = 'pc-top-menu';
+    bar.innerHTML = `
+      <div class="pc-top-menu-inner">
+        <a href="index.html">대시보드</a>
+        <a href="roadmaster.html">로드마스터</a>
+        <a href="checklist-generator.html">체크리스트</a>
+      </div>
+    `;
+    document.body.appendChild(bar);
+  }
+
   function updateJapanClock() {
     const tokyo = new Intl.DateTimeFormat('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' }).format(new Date());
     ['jp-time-ko', 'jp-time-ja', 'jp-time-zh'].forEach((id) => {
@@ -98,6 +112,7 @@
 
   ensureGlobalUi();
   ensureDesktopSidebar();
+  ensurePcTopMenu();
   updateJapanClock();
   setInterval(updateJapanClock, 30000);
 

@@ -854,7 +854,7 @@ body { background: var(--midnight); }
 .a4-grid section { border: 1px solid #ddd; padding: 0.5rem; }
 .a4-grid p { white-space: pre-wrap; line-height: 1.55; }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
   .tri-compare { grid-template-columns: repeat(3, 1fr); }
   .a4-grid { grid-template-columns: repeat(3, 1fr); }
   .lang-tabs { display: none; }
@@ -2375,6 +2375,46 @@ body:not(.home) .content-card {
 
   body.with-pc-sidebar {
     padding-left: 280px;
+    padding-top: 64px;
+  }
+
+  .pc-top-menu {
+    position: fixed;
+    top: 56px;
+    left: 280px;
+    right: 0;
+    height: 56px;
+    background: #0d2339;
+    border-bottom: 1px solid #264667;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pc-top-menu-inner {
+    width: min(1480px, calc(100vw - 320px));
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-right: 1rem;
+  }
+
+  .pc-top-menu-inner a {
+    text-decoration: none;
+    color: #e6f0fb;
+    background: #12314e;
+    border: 1px solid #32567b;
+    border-radius: 999px;
+    padding: 0.42rem 0.82rem;
+    font-weight: 800;
+    font-size: 0.92rem;
+    transition: border-color .16s ease, transform .16s ease;
+  }
+
+  .pc-top-menu-inner a:hover {
+    border-color: #ffb800;
+    transform: translateY(-1px);
   }
 
   .pc-sidebar {
@@ -2425,6 +2465,7 @@ body:not(.home) .content-card {
     max-width: 1480px;
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 1rem;
   }
 
   .dashboard,
@@ -2440,7 +2481,7 @@ body:not(.home) .content-card {
   .housing-check-grid,
   .asset-grid,
   .menu-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
   }
 
   .card,
@@ -2483,6 +2524,10 @@ body:not(.home) .content-card {
     transform: translateY(-2px);
   }
 
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+
   .checklist-return,
   .asset-checklist-return,
   .housing-bottom-actions,
@@ -2491,26 +2536,6 @@ body:not(.home) .content-card {
   .em-bottom,
   .home-bottom,
   .future-bottom {
-    position: fixed !important;
-    top: 76px !important;
-    right: 22px !important;
-    left: auto !important;
-    bottom: auto !important;
-    width: min(320px, 26vw);
-    padding: 0 !important;
-    background: transparent !important;
-    z-index: 60;
-  }
-
-  .checklist-return .cta-btn,
-  .asset-checklist-return .cta-btn,
-  .conversation-bottom .cta-btn,
-  .digital-bottom .cta-btn,
-  .em-bottom .cta-btn,
-  .home-bottom .cta-btn,
-  .future-bottom .cta-btn,
-  .housing-bottom-actions .cta-btn,
-  .housing-bottom-actions .action-btn {
-    min-height: 52px;
+    display: none !important;
   }
 }
