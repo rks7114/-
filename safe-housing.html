@@ -24,6 +24,32 @@
     .housing-hero h1,
     .housing-hero .hero-copy { color: #001f3f; }
 
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.12);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
     main {
       max-width: 760px;
       padding: 0.9rem 0.75rem 8.8rem;
@@ -120,6 +146,11 @@
       box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
     }
 
+    .fact-table {
+      min-width: 100%;
+      font-size: 0.95rem;
+    }
+
     @media (min-width: 900px) {
       .housing-bottom-actions {
         position: static;
@@ -129,6 +160,7 @@
       }
       main { padding-bottom: 1rem; }
       .mobile-core-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fact-table { min-width: 760px; }
     }
   </style>
 
