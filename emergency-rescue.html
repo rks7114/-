@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4. 긴급구조</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .emergency-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .emergency-hero .eyebrow,
+    .emergency-hero h1,
+    .emergency-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9.2rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .one-touch-dial {
+      margin-top: 0.6rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
+    .dial-btn {
+      min-height: 54px;
+      border-radius: 24px;
+      border: 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+    .dial-red { background: linear-gradient(120deg, #ff6b6b, #e01e37); color: #fff; }
+    .dial-gold { background: linear-gradient(120deg, #ffd64d, #ffb800); color: #001f3f; }
+
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .em-card {
+      border-radius: 24px;
+      border: 1px solid #d9e3f0;
+      padding: 0.9rem 16px;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+    }
+    .em-card h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #001f3f;
+    }
+    .chip {
+      display: inline-block;
+      margin-top: 0.35rem;
+      margin-bottom: 0.1rem;
+      color: #8e6a2f;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+    .em-card ul { margin: 0; padding-left: 1rem; }
+    .em-card li { margin: 0.12rem 0; color: #1f3348; }
+
+    .emphasis-card {
+      border: 1px solid #f1b6b6;
+      background: linear-gradient(150deg, #fff5f5, #ffe7e7);
+    }
+
+    .em-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .em-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .one-touch-dial { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .emergency-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .em-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
+
+  <header class="hero emergency-hero">
+    <p class="eyebrow">4. EMERGENCY</p>
+    <h1>긴급구조</h1>
+    <p class="hero-copy">원터치 다이얼 · 현장 대응 데이터</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="one-touch-dial" aria-label="긴급 원터치 다이얼">
+        <a class="dial-btn dial-red" href="tel:110">경찰 110 바로전화</a>
+        <a class="dial-btn dial-red" href="tel:119">소방·구급 119 바로전화</a>
+        <a class="dial-btn dial-gold" href="tel:+81334556601">주일 한국대사관 긴급전화</a>
+      </div>
+
+      <div class="emergency-grid">
+        <article class="em-card emphasis-card">
+          <h3>일본 내 주요 신고 번호</h3>
+          <span class="chip">즉시 신고</span>
+          <ul>
+            <li>경찰: 110 (사건·사고·범죄 신고)</li>
+            <li>소방·구급: 119 (화재·응급환자 이송)</li>
+            <li>해상 사고: 118 (해상보안청)</li>
+          </ul>
+          <span class="chip">신고 순서</span>
+          <ul>
+            <li>위치(주소/랜드마크) → 상황 → 부상자 수 전달</li>
+          </ul>
+        </article>
+
+        <article class="em-card">
+          <h3>주일본 한국 대사관·영사관 연락처</h3>
+          <span class="chip">대사관(도쿄)</span>
+          <ul>
+            <li>대표: +81-3-3452-7611</li>
+            <li>긴급(야간/휴일): +81-3-3455-2601</li>
+          </ul>
+          <span class="chip">영사관 예시</span>
+          <ul>
+            <li>주오사카총영사관: +81-6-4256-2345</li>
+            <li>주후쿠오카총영사관: +81-92-771-0461</li>
+          </ul>
+        </article>
+
+        <article class="em-card">
+          <h3>영사콜센터</h3>
+          <span class="chip">24시간</span>
+          <ul>
+            <li>해외에서: +82-2-3210-0404</li>
+            <li>국내에서: 02-3210-0404</li>
+          </ul>
+          <span class="chip">상담 대상</span>
+          <ul>
+            <li>여권 분실, 사건·사고, 구금, 긴급 귀국 지원</li>
+          </ul>
+        </article>
+
+        <article class="em-card">
+          <h3>야간 응급실 찾기 · 재난 알림 앱</h3>
+          <span class="chip">야간 응급실</span>
+          <ul>
+            <li>#7119 (응급상담 핫라인, 지역별 운영 확인)</li>
+            <li>지자체 야간·휴일 진료소 안내 페이지 확인</li>
+          </ul>
+          <span class="chip">재난 알림 앱 추천</span>
+          <ul>
+            <li>Safety tips (관광청 다국어 재난앱)</li>
+            <li>Yahoo!防災速報 (지진·호우·태풍 경보)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="em-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="practical-conversation.html">회화</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

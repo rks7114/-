@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checklist Generator | Jamgong Japan</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    body { background: #f8f9fa; color: #102a43; line-height: 1.6; }
+    .jg-wrap { max-width: 420px; margin: 0 auto; min-height: 100vh; }
+    .jg-top { padding: 20px 18px 18px; border-radius: 0 0 40px 40px; background: #FFB800; color: #001f3f; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .jg-lang { display:flex; gap:10px; justify-content:center; padding: 10px 0 4px; }
+    .jg-lang button { padding: 8px 12px; border-radius: 999px; border: 0; cursor:pointer; opacity:.8; color:#001f3f; background: transparent; font-weight:800; }
+    .jg-lang button.active { opacity:1; font-weight: 800; background:#FFFFFF4D; }
+    .jg-card { margin: 14px 14px 0; padding: 14px; border-radius: 24px; background: #FBFBFC; box-shadow: 0 10px 30px rgba(0,29,63,0.08); }
+    .jg-h1 { text-align:center; font-size: 20px; font-weight: 900; letter-spacing: -0.05em; margin: 6px 0 2px; color:#001f3f; text-shadow: 0 1px 0 rgba(255,184,0,0.18); }
+    .jg-sub { text-align:center; font-size: 13px; opacity:.9; margin: 0 0 10px; color:#001f3f; }
+    .jg-form { display:grid; gap: 10px; }
+    .jg-row { display:grid; gap: 6px; }
+    .jg-label { font-size: 12px; opacity:.75; }
+    .jg-input, .jg-select { width: 100%; padding: 12px 12px; border-radius: 24px; border: 1px solid rgba(0,0,0,.12); background: #fff; outline: none; font-size: 14px; }
+    .jg-actions { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .jg-btn { flex: 1; min-width: 120px; padding: 12px 12px; border-radius: 24px; border: 0; cursor: pointer; font-weight: 900; color:#001f3f; background: linear-gradient(120deg, #ffd64d, #ffb800); transition: transform .12s ease, filter .12s ease; }
+    .jg-btn.secondary { opacity:.85; background: #fff5cc; }
+    .jg-btn:active { transform: scale(0.98); }
+    .jg-progress { margin-top: 10px; }
+    .jg-progress-top { display:flex; justify-content:space-between; font-size: 12px; opacity:.8; margin-bottom: 6px; }
+    .jg-bar { height: 10px; border-radius: 999px; background: rgba(0,0,0,.08); overflow:hidden; }
+    .jg-bar > div { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #FFB800 0%, #FFA500 100%); transition: width .25s ease; }
+    .jg-list { margin-top: 10px; display:grid; gap: 10px; }
+    .jg-group { padding: 12px; border-radius: 16px; border: 1px solid rgba(0,0,0,.08); background: rgba(255,255,255,.85); }
+    .jg-group h3 { margin: 0 0 8px; font-size: 14px; }
+    .jg-item { display:flex; gap: 10px; align-items:flex-start; padding: 8px 10px; border-radius: 24px; transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease; }
+    .jg-item:hover { background: rgba(0,0,0,.03); }
+    .jg-item input {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      appearance: none;
+      border-radius: 6px;
+      border: 1.5px solid rgba(0, 31, 63, 0.35);
+      background: #fff;
+      display: grid;
+      place-content: center;
+      transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
+    }
+    .jg-item input::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      transform: scale(0);
+      transition: transform .15s ease;
+      background: linear-gradient(135deg, #FFB800 0%, #FFA500 100%);
+    }
+    .jg-item input:checked { border-color: #ffb300; }
+    .jg-item input:checked::after { transform: scale(1); }
+    .jg-item.is-done {
+      background: rgba(255, 184, 0, 0.12);
+      box-shadow: 0 10px 20px rgba(255, 165, 0, 0.2);
+      transform: translateY(-1px);
+      animation: donePulse .3s ease;
+    }
+    @keyframes donePulse {
+      0% { transform: scale(0.99); }
+      60% { transform: scale(1.01); }
+      100% { transform: scale(1); }
+    }
+    .jg-title { font-weight: 900; font-size: 13px; color: #001f3f; }
+    .jg-meta { font-size: 12px; opacity:.72; margin-top: 2px; }
+    .jg-links { display:flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+    .jg-links a { font-size: 12px; text-decoration:none; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(0,0,0,.12); opacity:.9; }
+    .jg-footer { padding: 14px; text-align:center; font-size: 12px; opacity:.7; }
+    .jg-back { display:inline-flex; gap:8px; align-items:center; text-decoration:none; font-weight:900; opacity:.95; color:#001f3f; }
+  </style>
+</head>
+<body>
+  <div class="jg-wrap">
+    <div class="jg-top">
+      <a class="jg-back" href="./roadmaster.html" aria-label="Back to Roadmaster">← <span id="t_back">로드마스터</span></a>
+      <div class="jg-lang" role="tablist" aria-label="Language">
+        <button id="btn_ko" type="button" class="active">한국어</button>
+        <button id="btn_ja" type="button">日本語</button>
+        <button id="btn_zh" type="button">简体中文</button>
+      </div>
+      <div class="jg-h1" id="t_title">체크리스트 자동 생성기</div>
+      <div class="jg-sub" id="t_sub">입국일과 상황을 입력하면 “지금 해야 할 일”이 자동으로 정리됩니다.</div>
+    </div>
+
+    <div class="jg-card" id="panel_form">
+      <div class="jg-form">
+        <div class="jg-row"><div class="jg-label" id="t_arrival_label">입국일</div><input class="jg-input" id="arrivalDate" type="date" /></div>
+        <div class="jg-row"><div class="jg-label" id="t_visa_label">비자/체류자격(간단)</div><select class="jg-select" id="visaType"><option value="work">취업/회사(Work)</option><option value="student">유학(Student)</option><option value="family">가족/배우자(Family)</option><option value="other">기타(Other)</option></select></div>
+        <div class="jg-row"><div class="jg-label" id="t_family_label">가족 동반</div><select class="jg-select" id="withFamily"><option value="no">아니오</option><option value="yes">예</option></select></div>
+        <div class="jg-row"><div class="jg-label" id="t_housing_label">주거 형태</div><select class="jg-select" id="housingType"><option value="rental">임대(원룸/아파트)</option><option value="share">쉐어하우스</option><option value="dorm">기숙사</option><option value="hotel">임시거처(호텔/지인)</option></select></div>
+        <div class="jg-actions"><button class="jg-btn" id="btn_generate" type="button">생성하기</button><button class="jg-btn secondary" id="btn_reset" type="button">초기화</button></div>
+        <div class="jg-actions"><button class="jg-btn secondary" id="btn_print" type="button">PDF로 저장(프린트)</button><button class="jg-btn secondary" id="btn_ics" type="button">캘린더(ICS) 내보내기</button></div>
+        <div class="jg-progress" id="progressBox" style="display:none;"><div class="jg-progress-top"><div id="t_progress_left">진행률</div><div id="progressText">0%</div></div><div class="jg-bar"><div id="progressBar"></div></div></div>
+      </div>
+    </div>
+
+    <div class="jg-card" id="panel_list" style="display:none;"><div class="jg-list" id="taskList"></div></div>
+    <div class="jg-footer"><div id="t_footer">체크 상태는 이 기기 브라우저에 저장됩니다(localStorage).</div></div>
+  </div>
+<script>
+const I18N={ko:{back:"로드마스터",title:"체크리스트 자동 생성기",sub:"입국일과 상황을 입력하면 “지금 해야 할 일”이 자동으로 정리됩니다.",arrivalLabel:"입국일",visaLabel:"비자/체류자격(간단)",familyLabel:"가족 동반",housingLabel:"주거 형태",generate:"생성하기",reset:"초기화",print:"PDF로 저장(프린트)",ics:"캘린더(ICS) 내보내기",progress:"진행률",footer:"체크 상태는 이 기기 브라우저에 저장됩니다(localStorage).",groups:{d0_7:"D+0 ~ D+7 (초기 정착)",d8_30:"D+8 ~ D+30 (기반 구축)",d31_90:"D+31 ~ D+90 (세금/보험/생활 안정)",d91_180:"D+91 ~ D+180 (비자/장기 계획)"},meta:{due:"권장 마감",mins:"예상 소요",place:"장소"},alerts:{needDate:"입국일을 선택해 주세요."}},ja:{back:"ロードマスター",title:"チェックリスト自動生成",sub:"入国日と状況を入力すると「今やること」を自動で整理します。",arrivalLabel:"入国日",visaLabel:"在留資格（簡易）",familyLabel:"家族同伴",housingLabel:"住居タイプ",generate:"生成する",reset:"リセット",print:"PDF保存（印刷）",ics:"カレンダー(ICS)書き出し",progress:"進捗",footer:"チェック状態はこの端末のブラウザに保存されます（localStorage）。",groups:{d0_7:"D+0〜D+7（初期）",d8_30:"D+8〜D+30（基盤作り）",d31_90:"D+31〜D+90（税・保険・安定）",d91_180:"D+91〜D+180（更新・長期）"},meta:{due:"目安期限",mins:"所要時間",place:"場所"},alerts:{needDate:"入国日を選択してください。"}},zh:{back:"路线管理",title:"清单自动生成器",sub:"输入入境日期与情况，自动整理“现在必须做的事”。",arrivalLabel:"入境日期",visaLabel:"在留资格（简要）",familyLabel:"是否携带家属",housingLabel:"居住类型",generate:"生成清单",reset:"重置",print:"保存为PDF（打印）",ics:"导出日历(ICS)",progress:"进度",footer:"勾选状态会保存在本设备浏览器（localStorage）。",groups:{d0_7:"D+0〜D+7（初期安顿）",d8_30:"D+8〜D+30（建立基础）",d31_90:"D+31〜D+90（税务/保险/稳定）",d91_180:"D+91〜D+180（更新/长期规划）"},meta:{due:"建议截止",mins:"预计耗时",place:"地点"},alerts:{needDate:"请选择入境日期。"}}};
+let LANG='ko';const STORAGE_KEY='jg_japan_checklist_v1';
+const el=id=>document.getElementById(id);
+function t(path){const parts=path.split('.');let cur=I18N[LANG];for(const p of parts)cur=cur?.[p];return cur??path}
+function applyLangUI(){el('t_back').textContent=t('back');el('t_title').textContent=t('title');el('t_sub').textContent=t('sub');el('t_arrival_label').textContent=t('arrivalLabel');el('t_visa_label').textContent=t('visaLabel');el('t_family_label').textContent=t('familyLabel');el('t_housing_label').textContent=t('housingLabel');el('btn_generate').textContent=t('generate');el('btn_reset').textContent=t('reset');el('btn_print').textContent=t('print');el('btn_ics').textContent=t('ics');el('t_progress_left').textContent=t('progress');el('t_footer').textContent=t('footer');el('btn_ko').classList.toggle('active',LANG==='ko');el('btn_ja').classList.toggle('active',LANG==='ja');el('btn_zh').classList.toggle('active',LANG==='zh')}
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null')}catch{return null}}
+function saveState(s){localStorage.setItem(STORAGE_KEY,JSON.stringify(s))}
+function addDays(date,days){const d=new Date(date);d.setDate(d.getDate()+days);return d}
+function toISODate(d){const z=new Date(d);return `${z.getFullYear()}-${String(z.getMonth()+1).padStart(2,'0')}-${String(z.getDate()).padStart(2,'0')}`}
+function safeText(obj){return obj?.[LANG]??obj?.ko??''}
+function buildTaskTemplates(){const common=[{key:'addr_register',group:'d8_30',offsetDays:30,mins:45,place:'区/市役所',title:{ko:'주소 등록(전입 신고)',ja:'住所登録（転入届）',zh:'地址登记（迁入申报）'},links:[{label:{ko:'로드마스터',ja:'ロードマスター',zh:'路线页'},href:'./roadmaster.html'}]},{key:'phone_setup',group:'d0_7',offsetDays:3,mins:30,place:'매장/온라인',title:{ko:'유심/통신 세팅',ja:'SIM/通信設定',zh:'SIM/通信设置'},links:[{label:{ko:'디지털 헬프',ja:'デジタルヘルプ',zh:'数字帮助'},href:'./digital-help.html'}]}];const byVisa={work:[{key:'tax_basics',group:'d31_90',offsetDays:60,mins:25,place:'온라인/회사',title:{ko:'세금/원천 관련 체크(회사 문서)',ja:'税・源泉関連の確認（会社）',zh:'确认税务/工资扣缴（公司）'}}],student:[{key:'school_docs',group:'d0_7',offsetDays:5,mins:30,place:'학교',title:{ko:'학교 제출 서류 정리',ja:'学校提出書類の整理',zh:'整理学校提交材料'}}],family:[{key:'family_admin',group:'d8_30',offsetDays:28,mins:40,place:'区/市役所',title:{ko:'가족 관련 행정 점검',ja:'家族関連の手続き確認',zh:'核对家属相关手续'}}],other:[{key:'status_confirm',group:'d8_30',offsetDays:15,mins:20,place:'온라인/기관',title:{ko:'체류자격/갱신 기준 확인',ja:'在留資格・更新要件の確認',zh:'确认在留资格/更新条件'}}]};const byHousing={rental:[{key:'housing_contract',group:'d0_7',offsetDays:7,mins:30,place:'부동산/집',title:{ko:'임대 계약 체크',ja:'賃貸契約チェック',zh:'核对租房合同'}}],share:[{key:'house_rules',group:'d0_7',offsetDays:4,mins:15,place:'거주지',title:{ko:'쉐어하우스 규칙 점검',ja:'シェアハウス規則確認',zh:'确认合租规则'}}],dorm:[{key:'dorm_docs',group:'d0_7',offsetDays:3,mins:15,place:'기숙사',title:{ko:'기숙사 필수 등록 확인',ja:'寮の必須登録確認',zh:'确认宿舍必需登记'}}],hotel:[{key:'temp_plan',group:'d0_7',offsetDays:2,mins:20,place:'온라인',title:{ko:'장기 주거 전환 계획',ja:'長期住居への計画',zh:'长期住房计划'}}]};return{common,byVisa,byHousing}}
+function buildTasksFromForm(arrivalISO,visaType,withFamily,housingType){const {common,byVisa,byHousing}=buildTaskTemplates();const arrival=new Date(arrivalISO);let tasks=[...common,...(byVisa[visaType]||[]),...(byHousing[housingType]||[])];return [...new Map(tasks.map(x=>[x.key,{id:x.key,group:x.group,dueDate:toISODate(addDays(arrival,x.offsetDays)),mins:x.mins,place:x.place,title:x.title,links:x.links||[]}])).values()]}
+function groupTasks(tasks){const order=['d0_7','d8_30','d31_90','d91_180'];const bucket={d0_7:[],d8_30:[],d31_90:[],d91_180:[]};for(const task of tasks)(bucket[task.group]||=[]).push(task);for(const g of order)bucket[g].sort((a,b)=>a.dueDate.localeCompare(b.dueDate));return{order,bucket}}
+function updateProgress(state){const total=state.tasks.length;const doneCount=state.tasks.reduce((a,t)=>a+(state.done[t.id]?1:0),0);const pct=total?Math.round(doneCount/total*100):0;el('progressText').textContent=`${pct}% (${doneCount}/${total})`;el('progressBar').style.width=`${pct}%`}
+function renderTasks(state){const list=el('taskList');list.innerHTML='';const {order,bucket}=groupTasks(state.tasks);for(const g of order){const ge=document.createElement('div');ge.className='jg-group';const h=document.createElement('h3');h.textContent=t(`groups.${g}`);ge.appendChild(h);for(const task of bucket[g]||[]){const row=document.createElement('div');row.className='jg-item';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!state.done[task.id];if(cb.checked)row.classList.add('is-done');cb.addEventListener('change',()=>{state.done[task.id]=cb.checked;row.classList.toggle('is-done',cb.checked);saveState(state);updateProgress(state)});const body=document.createElement('div');const title=document.createElement('div');title.className='jg-title';title.textContent=safeText(task.title);const meta=document.createElement('div');meta.className='jg-meta';meta.textContent=`${t('meta.due')}: ${task.dueDate} · ${t('meta.mins')}: ${task.mins}m · ${t('meta.place')}: ${task.place}`;body.append(title,meta);row.append(cb,body);ge.appendChild(row)}list.appendChild(ge)}el('panel_list').style.display='block';el('progressBox').style.display='block';updateProgress(state)}
+function exportICS(state){const dtstamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jamgong Japan//Checklist//KO','CALSCALE:GREGORIAN'];for(const task of state.tasks){const dt=task.dueDate.replace(/-/g,'');lines.push('BEGIN:VEVENT',`UID:${task.id}-${dt}@jamgong-japan`,`DTSTAMP:${dtstamp}`,`DTSTART;VALUE=DATE:${dt}`,`DTEND;VALUE=DATE:${dt}`,`SUMMARY:${safeText(task.title)}`,'END:VEVENT')}lines.push('END:VCALENDAR');const blob=new Blob([lines.join('\r\n')],{type:'text/calendar;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`jamgong-japan-checklist-${state.arrivalDate}.ics`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+function rerenderFromState(){const state=loadState();if(state?.tasks?.length)renderTasks(state)}
+el('btn_ko').addEventListener('click',()=>{LANG='ko';applyLangUI();rerenderFromState()});el('btn_ja').addEventListener('click',()=>{LANG='ja';applyLangUI();rerenderFromState()});el('btn_zh').addEventListener('click',()=>{LANG='zh';applyLangUI();rerenderFromState()});
+el('btn_generate').addEventListener('click',()=>{const arrivalDate=el('arrivalDate').value;if(!arrivalDate)return alert(t('alerts.needDate'));const state={lang:LANG,arrivalDate,visaType:el('visaType').value,withFamily:el('withFamily').value,housingType:el('housingType').value,tasks:buildTasksFromForm(arrivalDate,el('visaType').value,el('withFamily').value,el('housingType').value),done:{}};const prev=loadState();if(prev?.done){for(const task of state.tasks){if(prev.done[task.id])state.done[task.id]=true}}saveState(state);renderTasks(state)});
+el('btn_reset').addEventListener('click',()=>{localStorage.removeItem(STORAGE_KEY);el('panel_list').style.display='none';el('progressBox').style.display='none';el('taskList').innerHTML=''})
+el('btn_print').addEventListener('click',()=>window.print());
+el('btn_ics').addEventListener('click',()=>{const s=loadState();if(s?.tasks?.length)exportICS(s)});
+(function init(){const s=loadState();if(s?.lang)LANG=s.lang;applyLangUI();if(s?.arrivalDate)el('arrivalDate').value=s.arrivalDate;if(s?.visaType)el('visaType').value=s.visaType;if(s?.withFamily)el('withFamily').value=s.withFamily;if(s?.housingType)el('housingType').value=s.housingType;rerenderFromState()})();
+</script>
+
+<script>
+(function(){
+  const groupIndex={d0_7:1,d8_30:2,d31_90:3,d91_180:4};
+  function openByHash(){
+    const key=(location.hash||'').replace('#','');
+    if(!groupIndex[key]) return;
+    const arrival=document.getElementById('arrivalDate');
+    if(arrival && !arrival.value){
+      const now=new Date();
+      arrival.value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    }
+    const panel=document.getElementById('panel_list');
+    if(panel && panel.style.display==='none'){
+      document.getElementById('btn_generate').click();
+    }
+    setTimeout(()=>{
+      const groups=[...document.querySelectorAll('.jg-group')];
+      const idx=groupIndex[key]-1;
+      const target=groups[idx];
+      if(!target) return;
+      groups.forEach(g=>g.style.display='none');
+      target.style.display='block';
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    },120);
+  }
+  window.addEventListener('load', openByHash);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8. 본국연결</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .homeland-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .homeland-hero .eyebrow,
+    .homeland-hero h1,
+    .homeland-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .homeland-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+
+    .home-card,
+    .docs-card {
+      border-radius: 24px;
+      border: 1px solid #d8e2ef;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+      padding: 0.9rem 16px;
+    }
+
+    .home-card h3,
+    .docs-card h3 {
+      margin: 0 0 0.45rem;
+      color: #001f3f;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .task-item {
+      margin-top: 0.55rem;
+      border: 1px solid #e0e8f3;
+      border-radius: 18px;
+      padding: 0.62rem;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 0.55rem;
+      background: #fff;
+      align-items: start;
+    }
+
+    .task-check {
+      width: 30px;
+      height: 30px;
+      margin-top: 0.1rem;
+      accent-color: #ffb800;
+      cursor: pointer;
+    }
+
+    .task-label {
+      color: #8e6a2f;
+      font-weight: 900;
+      font-size: 0.94rem;
+      display: inline-block;
+      margin-bottom: 0.1rem;
+    }
+
+    .task-line {
+      margin: 0;
+      color: #1f3348;
+    }
+
+    .emph-list {
+      margin: 0;
+      padding-left: 1rem;
+    }
+    .emph-list li { margin: 0.2rem 0; }
+
+    .home-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .home-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .home-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .homeland-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
+
+  <header class="hero homeland-hero">
+    <p class="eyebrow">8. HOMELAND CONNECT</p>
+    <h1>본국연결</h1>
+    <p class="hero-copy">한국 정리 체크 · 제출서류 준비</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="homeland-grid">
+        <article class="home-card">
+          <h3>한국 휴대폰·우편물 정리</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">휴대폰 회선</span>
+              <p class="task-line">번호 유지/해지 여부 확정 후 로밍·정지·해지 중 하나로 처리</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">우편물 전환</span>
+              <p class="task-line">한국 주소지 우편물 수령 대리인 지정 또는 보관 서비스 신청</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="home-card">
+          <h3>구독 서비스 해지</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">자동결제 점검</span>
+              <p class="task-line">OTT·클라우드·쇼핑 멤버십 자동결제 목록 일괄 점검</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">해지 완료 기록</span>
+              <p class="task-line">해지 확인 메일·영수증 캡처를 클라우드 폴더에 보관</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="home-card">
+          <h3>세금·건강보험 마감</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">세금 마감</span>
+              <p class="task-line">종합소득세/지방세 신고 상태와 체납 여부 최종 확인</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">건강보험 정리</span>
+              <p class="task-line">건강보험 자격변동 신고 및 납부 정산 내역 확보</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="docs-card">
+          <h3>한국에서 챙겨야 할 서류 목록</h3>
+          <ul class="emph-list">
+            <li>가족관계증명서</li>
+            <li>기본증명서</li>
+            <li>주민등록등본/초본</li>
+            <li>납세증명서·소득금액증명</li>
+            <li>건강보험 자격득실 확인서</li>
+            <li>범죄경력회보서(필요 시)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="home-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

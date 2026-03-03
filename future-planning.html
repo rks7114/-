@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9. 미래설계</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .future-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .future-hero .eyebrow,
+    .future-hero h1,
+    .future-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .timeline {
+      margin-top: 0.65rem;
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-card,
+    .alert-card {
+      border-radius: 24px;
+      border: 1px solid #d8e2ef;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+      padding: 0.9rem 16px;
+    }
+
+    .timeline-card h3,
+    .alert-card h3 {
+      margin: 0 0 0.45rem;
+      color: #001f3f;
+      font-size: 1.06rem;
+      font-weight: 900;
+    }
+
+    .time-badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      background: #ffe8a1;
+      color: #001f3f;
+      font-weight: 900;
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-card ul,
+    .alert-card ul { margin: 0; padding-left: 1rem; }
+    .timeline-card li,
+    .alert-card li { margin: 0.12rem 0; color: #1f3348; }
+
+    .alert-input {
+      margin-top: 0.55rem;
+      width: 100%;
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid #ccd9ea;
+      padding: 0.65rem 0.7rem;
+      font-size: 1rem;
+      color: #102a43;
+      background: #fff;
+    }
+
+    .future-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .future-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .future-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
+
+  <header class="hero future-hero">
+    <p class="eyebrow">9. FUTURE PLANNING</p>
+    <h1>미래설계</h1>
+    <p class="hero-copy">장기 정착 타임라인 · 중요 일정 기록</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="timeline">
+        <article class="timeline-card">
+          <span class="time-badge">비자 갱신 절차</span>
+          <h3>체류기간 만료 전 준비</h3>
+          <ul>
+            <li>재류기간 만료 전 서류 체크리스트 확정</li>
+            <li>재직증명·소득증빙·납세증명 최신본 확보</li>
+            <li>입국관리국 예약 후 갱신 신청 접수</li>
+          </ul>
+        </article>
+
+        <article class="timeline-card">
+          <span class="time-badge">전직 신고 의무</span>
+          <h3>소속기관 변경 신고</h3>
+          <ul>
+            <li>회사 퇴사/입사 시 출입국 신고 의무 확인</li>
+            <li>전자신고 또는 우편 신고 경로 선택</li>
+            <li>고용계약서·재류카드 사본 보관</li>
+          </ul>
+        </article>
+
+        <article class="timeline-card">
+          <span class="time-badge">자산 형성</span>
+          <h3>NISA 중심 장기 운용</h3>
+          <ul>
+            <li>NISA 계좌 개설 가능 여부 은행/증권사 확인</li>
+            <li>적립식 ETF·인덱스 비중 사전 설정</li>
+            <li>비상자금·생활비 계좌와 투자계좌 분리</li>
+          </ul>
+        </article>
+
+        <article class="alert-card">
+          <span class="time-badge">중요 일정 알림</span>
+          <h3>개인 일정 기록</h3>
+          <ul>
+            <li>비자 만료일, 신고 마감일, 납부일을 한곳에 기록</li>
+            <li>월별 리마인더 주기를 2회 이상 설정</li>
+          </ul>
+          <input class="alert-input" type="text" placeholder="예: 11월 1일 비자 갱신 서류 제출" />
+          <input class="alert-input" type="text" placeholder="예: 매월 25일 NISA 자동이체 확인" />
+        </article>
+      </div>
+    </section>
+
+    <div class="future-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
