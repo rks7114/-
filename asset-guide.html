@@ -7,6 +7,129 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A192F">
+
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    .asset-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.16);
+    }
+    .asset-hero .eyebrow,
+    .asset-hero h1,
+    .asset-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 7.4rem;
+    }
+
+    main > section.principles,
+    main > section.content-card,
+    main > section.premium-card {
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(0, 29, 63, 0.12);
+      padding-left: 16px;
+      padding-right: 16px;
+      overflow: hidden;
+    }
+
+    .asset-mobile-finance {
+      border: 1px solid #dbe4f1;
+      border-radius: 24px;
+      background: #fbfbfc;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.12);
+      padding: 0.95rem 16px;
+      margin-bottom: 0.9rem;
+    }
+    .asset-mobile-finance h2 {
+      margin: 0 0 0.55rem;
+      color: #001f3f;
+      font-size: 1.05rem;
+    }
+    .finance-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .finance-card {
+      border: 1px solid #d6dfec;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(0, 29, 63, 0.1);
+      padding: 0.8rem 16px;
+    }
+    .finance-card h3 {
+      margin: 0 0 0.42rem;
+      font-size: 1rem;
+      color: #001f3f;
+    }
+    .finance-label {
+      display: inline-block;
+      font-weight: 900;
+      color: #8e6a2f;
+      margin-top: 0.35rem;
+      margin-bottom: 0.1rem;
+      font-size: 0.95rem;
+    }
+    .finance-card ul { margin: 0; padding-left: 1rem; }
+    .finance-card li { margin: 0.1rem 0; }
+
+    .action-row,
+    .payment-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+    }
+    .cta-btn,
+    .action-btn,
+    .pay-btn,
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .asset-checklist-return {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 26;
+      padding: 0.5rem 0.8rem;
+      background: linear-gradient(180deg, rgba(248,249,250,0), rgba(248,249,250,.96) 35%, rgba(248,249,250,1));
+    }
+    .asset-checklist-return .cta-btn {
+      width: 100%;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.2);
+      text-decoration: none;
+    }
+
+    @media (min-width: 900px) {
+      .asset-checklist-return {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.85rem;
+      }
+      main { padding-bottom: 1rem; }
+      .finance-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+  </style>
+
 </head>
 <body>
   <nav class="lang-tabs" aria-label="언어 전환">
@@ -15,7 +138,7 @@
     <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
   </nav>
 
-  <header class="hero">
+  <header class="hero asset-hero">
     <p class="eyebrow">3. ASSET GUIDE</p>
     <h1>자산가이드</h1>
     <p class="hero-copy">세금·송금·저축 실무 정리</p>
@@ -24,6 +147,39 @@
   <main>
     <section class="principles">
       <a class="back-link" href="index.html">← 대시보드</a>
+
+      <section class="asset-mobile-finance" aria-label="금융 실무 카드">
+        <h2>모바일 금융 실무 데이터</h2>
+        <div class="finance-grid">
+          <article class="finance-card">
+            <h3>유초은행 계좌 개설</h3>
+            <span class="finance-label">필수 서류</span>
+            <ul><li>재류카드</li><li>여권</li><li>주소 확인 서류</li></ul>
+            <span class="finance-label">추천 서비스</span>
+            <ul><li>ゆうちょダイレクト</li><li>ATM 수수료 알림 설정</li></ul>
+            <span class="finance-label">실무 팁</span>
+            <ul><li>이름 표기를 재류카드와 동일하게 입력</li></ul>
+          </article>
+          <article class="finance-card">
+            <h3>해외 송금 앱 설정</h3>
+            <span class="finance-label">필수 서류</span>
+            <ul><li>신분증 스캔본</li><li>은행 계좌 정보</li><li>수취인 영문 정보</li></ul>
+            <span class="finance-label">추천 서비스</span>
+            <ul><li>Wise</li><li>SBI Remit</li></ul>
+            <span class="finance-label">실무 팁</span>
+            <ul><li>자주 쓰는 수취인을 템플릿으로 저장</li></ul>
+          </article>
+          <article class="finance-card">
+            <h3>신용카드 발급 팁</h3>
+            <span class="finance-label">필수 서류</span>
+            <ul><li>재류카드</li><li>소득 확인 자료</li><li>연락 가능한 휴대폰</li></ul>
+            <span class="finance-label">추천 서비스</span>
+            <ul><li>Rakuten Card</li><li>EPOS Card</li></ul>
+            <span class="finance-label">실무 팁</span>
+            <ul><li>첫 신청은 한 장만 진행 후 실적 구축</li></ul>
+          </article>
+        </div>
+      </section>
       <div class="table-wrap">
         <table class="fact-table">
           <thead>
@@ -125,6 +281,7 @@
       <p class="col-zh"><ruby>退税计算后支付输出<rt>tuì shuì jì suàn hòu zhī fù shū chū</rt></ruby>。</p>
       <div class="action-row"><button class="cta-btn" type="button" data-open-modal="#asset-pay-modal">유료 도구 시작</button></div>
     </section>
+    <div class="asset-checklist-return"><a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a></div>
   </main>
 
   <div id="asset-pay-modal" class="pay-modal" hidden>
