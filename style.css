@@ -2615,7 +2615,7 @@ body:not(.home) .content-card {
   .housing-check-grid,
   .asset-grid,
   .menu-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
   .card,
@@ -2661,7 +2661,7 @@ body:not(.home) .content-card {
 
   .dashboard,
   .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
   .dashboard-main,
@@ -2675,7 +2675,7 @@ body:not(.home) .content-card {
     right: 1.25rem;
     bottom: 1.15rem;
     transform: none;
-    width: min(420px, calc(100vw - 320px));
+    width: min(320px, calc(100vw - 300px));
   }
 
   .sos-fab {
@@ -2701,7 +2701,7 @@ body:not(.home) .content-card {
     bottom: auto;
     left: auto;
     z-index: 42;
-    width: min(280px, calc(100vw - 320px));
+    width: min(260px, calc(100vw - 300px));
     margin: 0;
     padding: 0.55rem;
     border-radius: 16px;
