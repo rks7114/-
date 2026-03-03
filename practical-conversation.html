@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7. 실무회화</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .conversation-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .conversation-hero .eyebrow,
+    .conversation-hero h1,
+    .conversation-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .conversation-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+      margin-top: 0.6rem;
+    }
+
+    .conv-card {
+      border: 1px solid #d6dfec;
+      border-radius: 24px;
+      padding: 0.9rem 16px;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+    }
+
+    .conv-title {
+      margin: 0 0 0.45rem;
+      color: #001f3f;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .phrase {
+      border: 1px solid #e2e8f3;
+      border-radius: 18px;
+      padding: 0.65rem 0.7rem;
+      background: #fff;
+      margin-top: 0.5rem;
+    }
+
+    .jp {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #001f3f;
+    }
+    .roma {
+      color: #8e6a2f;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .ko-mean {
+      margin: 0.2rem 0 0;
+      color: #1f3348;
+    }
+
+    .zoom-btn {
+      margin-top: 0.55rem;
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 24px;
+      background: linear-gradient(120deg, #ffd64d, #ffb800);
+      color: #001f3f;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .phrase.large .jp { font-size: 1.28rem; }
+    .phrase.large .roma { font-size: 1.06rem; }
+    .phrase.large .ko-mean { font-size: 1.05rem; }
+
+    .conversation-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .conversation-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .conversation-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .conversation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
+
+  <header class="hero conversation-hero">
+    <p class="eyebrow">7. PRACTICAL CONVERSATION</p>
+    <h1>실무회화</h1>
+    <p class="hero-copy">현장 제시용 핵심 문장 · 크게 보기 지원</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+      <div class="conversation-grid">
+        <article class="conv-card">
+          <h3 class="conv-title">관공서</h3>
+          <div class="phrase" id="phrase-office-1">
+            <div class="jp">申請書の書き方を教えてください。</div>
+            <div class="roma">Shinseisho no kakikata o oshiete kudasai.</div>
+            <p class="ko-mean">신청서 작성 방법을 알려주세요.</p>
+          </div>
+          <div class="phrase" id="phrase-office-2">
+            <div class="jp">必要な書類はこれで全部ですか。</div>
+            <div class="roma">Hitsuyou na shorui wa kore de zenbu desu ka.</div>
+            <p class="ko-mean">필요한 서류가 이걸로 전부인가요?</p>
+          </div>
+          <button class="zoom-btn" type="button" data-target="#phrase-office-1">크게 보기</button>
+        </article>
+
+        <article class="conv-card">
+          <h3 class="conv-title">은행</h3>
+          <div class="phrase" id="phrase-bank-1">
+            <div class="jp">口座開設をしたいです。</div>
+            <div class="roma">Kouza kaisetsu o shitai desu.</div>
+            <p class="ko-mean">계좌 개설을 하고 싶습니다.</p>
+          </div>
+          <div class="phrase" id="phrase-bank-2">
+            <div class="jp">海外送金の手数料を確認したいです。</div>
+            <div class="roma">Kaigai soukin no tesuuryou o kakunin shitai desu.</div>
+            <p class="ko-mean">해외 송금 수수료를 확인하고 싶습니다.</p>
+          </div>
+          <button class="zoom-btn" type="button" data-target="#phrase-bank-1">크게 보기</button>
+        </article>
+
+        <article class="conv-card">
+          <h3 class="conv-title">주거(가스/인터넷)</h3>
+          <div class="phrase" id="phrase-home-1">
+            <div class="jp">ガスの開栓は立ち会いが必要ですか。</div>
+            <div class="roma">Gasu no kaisen wa tachiai ga hitsuyou desu ka.</div>
+            <p class="ko-mean">가스 개통은 입회가 필요한가요?</p>
+          </div>
+          <div class="phrase" id="phrase-home-2">
+            <div class="jp">インターネット工事の日程を調整したいです。</div>
+            <div class="roma">Intaanetto kouji no nittei o chousei shitai desu.</div>
+            <p class="ko-mean">인터넷 공사 일정을 조정하고 싶습니다.</p>
+          </div>
+          <button class="zoom-btn" type="button" data-target="#phrase-home-1">크게 보기</button>
+        </article>
+
+        <article class="conv-card">
+          <h3 class="conv-title">긴급 상황</h3>
+          <div class="phrase" id="phrase-emg-1">
+            <div class="jp">救急車をお願いします。場所はここです。</div>
+            <div class="roma">Kyuukyuusha o onegai shimasu. Basho wa koko desu.</div>
+            <p class="ko-mean">구급차를 부탁합니다. 위치는 여기입니다.</p>
+          </div>
+          <div class="phrase" id="phrase-emg-2">
+            <div class="jp">警察を呼んでください。トラブルが発生しました。</div>
+            <div class="roma">Keisatsu o yonde kudasai. Toraburu ga hassei shimashita.</div>
+            <p class="ko-mean">경찰을 불러주세요. 문제가 발생했습니다.</p>
+          </div>
+          <button class="zoom-btn" type="button" data-target="#phrase-emg-1">크게 보기</button>
+        </article>
+      </div>
+    </section>
+
+    <div class="conversation-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+  <script>
+    document.querySelectorAll('.zoom-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.getAttribute('data-target'));
+        if (!target) return;
+        target.classList.toggle('large');
+      });
+    });
+  </script>
+</body>
+</html>

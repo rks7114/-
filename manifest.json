@@ -1,0 +1,10 @@
+{
+  "name": "Jamgong Japan Premium Portal",
+  "short_name": "Jamgong",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0A192F",
+  "theme_color": "#0A192F",
+  "lang": "ko",
+  "icons": []
+}

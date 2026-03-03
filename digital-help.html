@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5. 생활편의</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .digital-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .digital-hero .eyebrow,
+    .digital-hero h1,
+    .digital-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.65rem;
+    }
+
+    .app-card {
+      border-radius: 24px;
+      border: 1px solid #d9e2ef;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+      padding: 0.9rem 16px;
+    }
+
+    .app-head {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 0.55rem;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .app-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(140deg, #ffd64d, #ffb800);
+      color: #001f3f;
+      font-size: 1.2rem;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(0, 29, 63, 0.18);
+    }
+
+    .app-title {
+      margin: 0;
+      color: #001f3f;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .chip {
+      display: inline-block;
+      margin-top: 0.35rem;
+      margin-bottom: 0.1rem;
+      color: #8e6a2f;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .app-card ul { margin: 0; padding-left: 1rem; }
+    .app-card li { margin: 0.12rem 0; color: #1f3348; }
+
+    .install-check {
+      margin-top: 0.55rem;
+      border: 1px solid #e3eaf4;
+      border-radius: 18px;
+      background: #fff;
+      padding: 0.62rem;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 0.55rem;
+      align-items: center;
+    }
+
+    .install-check input {
+      width: 30px;
+      height: 30px;
+      accent-color: #ffb800;
+      cursor: pointer;
+    }
+
+    .install-check span {
+      font-weight: 900;
+      color: #001f3f;
+    }
+
+    .digital-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .digital-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .digital-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
+
+  <header class="hero digital-hero">
+    <p class="eyebrow">5. DIGITAL HELP</p>
+    <h1>생활편의</h1>
+    <p class="hero-copy">필수 앱 설치 · 현지 디지털 세팅</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="app-grid">
+        <article class="app-card">
+          <div class="app-head">
+            <div class="app-icon" aria-hidden="true">🚆</div>
+            <h3 class="app-title">일본 필수 교통 앱</h3>
+          </div>
+          <span class="chip">추천 앱</span>
+          <ul>
+            <li>Google Maps / Yahoo!乗換案内</li>
+            <li>Japan Travel by NAVITIME</li>
+          </ul>
+          <span class="chip">활용 포인트</span>
+          <ul><li>막차 시간·환승 플랫폼·지연 알림 실시간 확인</li></ul>
+          <label class="install-check"><input type="checkbox" /><span>설치 확인</span></label>
+        </article>
+
+        <article class="app-card">
+          <div class="app-head">
+            <div class="app-icon" aria-hidden="true">💬</div>
+            <h3 class="app-title">메신저 앱</h3>
+          </div>
+          <span class="chip">추천 앱</span>
+          <ul>
+            <li>LINE (일본 생활 필수)</li>
+            <li>KakaoTalk (한국 연락 유지)</li>
+          </ul>
+          <span class="chip">활용 포인트</span>
+          <ul><li>관공서·학교·관리회사 공지 수신용 LINE 알림 활성화</li></ul>
+          <label class="install-check"><input type="checkbox" /><span>설치 확인</span></label>
+        </article>
+
+        <article class="app-card">
+          <div class="app-head">
+            <div class="app-icon" aria-hidden="true">🔒</div>
+            <h3 class="app-title">VPN 설정</h3>
+          </div>
+          <span class="chip">설정 가이드</span>
+          <ul>
+            <li>신뢰 가능한 유료 VPN 선택</li>
+            <li>자동 연결(공공 Wi‑Fi) 옵션 활성화</li>
+          </ul>
+          <span class="chip">보안 포인트</span>
+          <ul><li>은행/결제 앱 사용 시 VPN 안정 연결 상태 확인</li></ul>
+          <label class="install-check"><input type="checkbox" /><span>설치 확인</span></label>
+        </article>
+
+        <article class="app-card">
+          <div class="app-head">
+            <div class="app-icon" aria-hidden="true">💴</div>
+            <h3 class="app-title">현지 간편 결제</h3>
+          </div>
+          <span class="chip">추천 서비스</span>
+          <ul>
+            <li>PayPay</li>
+            <li>Rakuten Pay / d払い</li>
+          </ul>
+          <span class="chip">실무 포인트</span>
+          <ul><li>본인인증 완료 후 잔액충전/카드연동까지 점검</li></ul>
+          <label class="install-check"><input type="checkbox" /><span>설치 확인</span></label>
+        </article>
+      </div>
+    </section>
+
+    <div class="digital-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
