@@ -2376,6 +2376,8 @@ body:not(.home) .content-card {
   body.with-pc-sidebar {
     padding-left: 280px;
     padding-top: 64px;
+    font-size: 17px;
+    line-height: 1.72;
   }
 
   .pc-top-menu {
@@ -2538,7 +2540,7 @@ body:not(.home) .content-card {
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
-    line-height: 1.68;
+    line-height: 1.72;
   }
 
   .card,
@@ -2582,6 +2584,7 @@ body:not(.home) .content-card {
     margin-right: -1rem;
     border-bottom-left-radius: 34px;
     border-bottom-right-radius: 34px;
+    overflow: clip;
   }
 
   .card,
@@ -2601,6 +2604,26 @@ body:not(.home) .content-card {
   .app-card {
     line-height: 1.74;
     padding: clamp(1.05rem, 1.15vw, 1.4rem);
+  }
+
+
+  .hero h1,
+  .golden-streamline-header h1,
+  .conversation-hero h1,
+  .emergency-hero h1,
+  .digital-hero h1,
+  .homeland-hero h1,
+  .future-hero h1,
+  .housing-hero h1,
+  .asset-hero h1,
+  .admin-hero h1 {
+    font-size: clamp(2rem, 2.6vw, 2.7rem);
+    line-height: 1.3;
+  }
+
+  .hero-copy,
+  .golden-streamline-header p {
+    font-size: clamp(1rem, 1.05vw, 1.12rem);
   }
   .dashboard,
   .workflow-grid,
