@@ -854,7 +854,7 @@ body { background: var(--midnight); }
 .a4-grid section { border: 1px solid #ddd; padding: 0.5rem; }
 .a4-grid p { white-space: pre-wrap; line-height: 1.55; }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .tri-compare { grid-template-columns: repeat(3, 1fr); }
   .a4-grid { grid-template-columns: repeat(3, 1fr); }
   .lang-tabs { display: none; }
@@ -2461,6 +2461,46 @@ body:not(.home) .content-card {
     transform: translateY(-1px);
   }
 
+
+  .pc-nav-ico {
+    width: 1.3rem;
+    display: inline-flex;
+    justify-content: center;
+    margin-right: 0.28rem;
+  }
+
+  .pc-sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.18rem;
+  }
+
+  .pc-sidebar-cta-wrap {
+    position: sticky;
+    bottom: 12px;
+    margin-top: 0.7rem;
+    padding-top: 0.5rem;
+  }
+
+  .pc-sidebar-cta {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    text-decoration: none;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #ffd84f, #ffb800);
+    color: #001f3f;
+    font-weight: 900;
+    border: 1px solid #d8a330;
+    box-shadow: 0 10px 22px rgba(0, 31, 63, 0.24);
+  }
+
+  .pc-sidebar-cta:hover {
+    filter: brightness(1.03);
+    transform: translateY(-1px);
+  }
   main {
     max-width: 1480px;
     padding-left: 1rem;
@@ -2468,6 +2508,22 @@ body:not(.home) .content-card {
     padding-top: 1rem;
   }
 
+
+  .hero,
+  .golden-streamline-header,
+  .conversation-hero,
+  .emergency-hero,
+  .digital-hero,
+  .homeland-hero,
+  .future-hero,
+  .housing-hero,
+  .asset-hero,
+  .admin-hero {
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
   .dashboard,
   .workflow-grid,
   .finance-grid,

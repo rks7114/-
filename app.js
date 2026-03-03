@@ -62,16 +62,19 @@
     sidebar.innerHTML = `
       <h2 class="pc-sidebar-title">JAMGONG JAPAN</h2>
       <nav class="pc-sidebar-menu" aria-label="Desktop menu">
-        <a href="index.html">대시보드</a>
-        <a href="admin-secretary.html">1. 행정비서</a>
-        <a href="safe-housing.html">2. 안심주거</a>
-        <a href="asset-guide.html">3. 자산가이드</a>
-        <a href="emergency-rescue.html">4. 긴급구조</a>
-        <a href="digital-help.html">5. 생활편의</a>
-        <a href="roadmaster.html">6. 로드마스터</a>
-        <a href="practical-conversation.html">7. 실무회화</a>
-        <a href="homeland-connect.html">8. 본국연결</a>
+        <a href="index.html"><span class="pc-nav-ico">🏠</span><span>대시보드</span></a>
+        <a href="admin-secretary.html"><span class="pc-nav-ico">1️⃣</span><span>1. 행정비서</span></a>
+        <a href="safe-housing.html"><span class="pc-nav-ico">2️⃣</span><span>2. 안심주거</span></a>
+        <a href="asset-guide.html"><span class="pc-nav-ico">3️⃣</span><span>3. 자산가이드</span></a>
+        <a href="emergency-rescue.html"><span class="pc-nav-ico">4️⃣</span><span>4. 긴급구조</span></a>
+        <a href="digital-help.html"><span class="pc-nav-ico">5️⃣</span><span>5. 생활편의</span></a>
+        <a href="roadmaster.html"><span class="pc-nav-ico">6️⃣</span><span>6. 로드마스터</span></a>
+        <a href="practical-conversation.html"><span class="pc-nav-ico">7️⃣</span><span>7. 실무회화</span></a>
+        <a href="homeland-connect.html"><span class="pc-nav-ico">8️⃣</span><span>8. 본국연결</span></a>
       </nav>
+      <div class="pc-sidebar-cta-wrap">
+        <a class="pc-sidebar-cta" href="checklist-generator.html">체크리스트로 이동</a>
+      </div>
     `;
     document.body.appendChild(sidebar);
     if (window.matchMedia('(min-width: 1024px)').matches) {
@@ -96,6 +99,7 @@
       <div class="pc-top-menu-inner">
         <a href="index.html">대시보드</a>
         <a href="roadmaster.html">로드마스터</a>
+        <a href="future-planning.html">미래설계</a>
         <a href="checklist-generator.html">체크리스트</a>
       </div>
     `;
