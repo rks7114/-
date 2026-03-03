@@ -7,6 +7,131 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A192F">
+
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+    .housing-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .housing-hero .eyebrow,
+    .housing-hero h1,
+    .housing-hero .hero-copy { color: #001f3f; }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 8.8rem;
+    }
+
+    .housing-mobile-core,
+    .housing-photo-emphasis,
+    .housing-mobile-core .lifeline-card,
+    .housing-mobile-core .garbage-card {
+      border-radius: 24px;
+      box-shadow: 0 14px 34px rgba(0, 29, 63, 0.14);
+    }
+
+    .housing-mobile-core {
+      background: #fbfbfc;
+      border: 1px solid #d9e2ef;
+      padding: 0.95rem 16px;
+      margin-bottom: 0.9rem;
+    }
+    .housing-mobile-core h2 {
+      margin: 0 0 0.55rem;
+      color: #001f3f;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .mobile-core-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .lifeline-card,
+    .garbage-card {
+      background: #ffffff;
+      border: 1px solid #d5dfec;
+      padding: 0.85rem 16px;
+    }
+
+    .lifeline-card h3,
+    .garbage-card h3,
+    .housing-photo-emphasis h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.02rem;
+      font-weight: 900;
+      color: #001f3f;
+    }
+
+    .label-chip {
+      display: inline-block;
+      margin-top: 0.35rem;
+      margin-bottom: 0.1rem;
+      color: #8e6a2f;
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .lifeline-card ul,
+    .garbage-card ul,
+    .housing-photo-emphasis ul { margin: 0; padding-left: 1rem; }
+    .lifeline-card li,
+    .garbage-card li,
+    .housing-photo-emphasis li { margin: 0.12rem 0; }
+
+    .housing-photo-emphasis {
+      margin-top: 0.8rem;
+      padding: 0.9rem 16px;
+      border: 1px solid #f2d489;
+      background: linear-gradient(145deg, #fff8e5, #fff1c5);
+    }
+
+    .housing-bottom-actions {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      display: grid;
+      gap: 0.75rem;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.84) 28%, rgba(7,20,35,0.98));
+    }
+    .housing-bottom-actions .cta-btn,
+    .housing-bottom-actions .action-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .housing-bottom-actions {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .mobile-core-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+
 </head>
 <body>
   <nav class="lang-tabs" aria-label="언어 전환">
@@ -15,7 +140,7 @@
     <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
   </nav>
 
-  <header class="hero">
+  <header class="hero housing-hero">
     <p class="eyebrow">2. SAFE HOUSING</p>
     <h1>안심주거</h1>
     <p class="hero-copy">주택 계약·보증·분쟁 예방 체크리스트</p>
@@ -24,6 +149,48 @@
   <main>
     <section class="principles">
       <a class="back-link" href="index.html">← 대시보드</a>
+
+      <section class="housing-mobile-core" aria-label="주거 라이프라인 실무 데이터">
+        <h2>모바일 주거 필수 신청 데이터</h2>
+        <div class="mobile-core-grid">
+          <article class="lifeline-card">
+            <h3>수도·전기·가스 신청</h3>
+            <span class="label-chip">신청 방법</span>
+            <ul>
+              <li>수도: 지자체 수도국 웹/전화로 사용 개시 신청</li>
+              <li>전기: 전력사(도쿄전력 등) 앱 또는 콜센터 접수</li>
+              <li>가스: 개통 예약 후 현장 입회 필수</li>
+            </ul>
+            <span class="label-chip">실무 팁</span>
+            <ul>
+              <li>입주일 3~5일 전에 수도·전기·가스 예약 동시 진행</li>
+            </ul>
+          </article>
+
+          <article class="garbage-card">
+            <h3>지자체별 쓰레기 배출 요령</h3>
+            <span class="label-chip">분리 배출 핵심</span>
+            <ul>
+              <li>가연/불연/자원쓰레기 분리 규칙 확인</li>
+              <li>지정 봉투 사용 여부 및 배출 요일 확인</li>
+            </ul>
+            <span class="label-chip">지자체 체크</span>
+            <ul>
+              <li>구청/시청 홈페이지에서 지역별 캘린더 다운로드</li>
+              <li>대형폐기물은 사전 예약 후 배출 스티커 부착</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="housing-photo-emphasis">
+          <h3>입주 시 파손 부위 사진 촬영 권장</h3>
+          <ul>
+            <li>벽, 바닥, 창틀, 욕실, 싱크대 파손 부위를 입주 당일 촬영</li>
+            <li>촬영 파일명에 위치·시간을 기록하고 관리회사에 즉시 공유</li>
+            <li>퇴거 정산 분쟁 대비용 원본 파일을 클라우드에 이중 보관</li>
+          </ul>
+        </article>
+      </section>
 
       <div class="table-wrap">
         <table class="fact-table">
@@ -138,6 +305,10 @@
         </article>
       </section>
     </section>
+    <div class="housing-bottom-actions">
+      <a class="action-btn" href="roadmaster.html#d0_7">라이프라인 신청 바로가기</a>
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
   </main>
 
   <nav class="mobile-bottom-nav">
