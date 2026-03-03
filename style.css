@@ -2509,6 +2509,33 @@ body:not(.home) .content-card {
     gap: 0.18rem;
   }
 
+  .pc-sidebar-flow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.42rem;
+    margin-top: 0.65rem;
+  }
+
+  .pc-flow-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 14px;
+    color: #e5f0ff;
+    border: 1px solid #2e4f72;
+    background: #0f2a44;
+    font-weight: 800;
+    font-size: 0.86rem;
+    transition: border-color .16s ease, transform .16s ease;
+  }
+
+  .pc-flow-link:hover {
+    border-color: #ffb800;
+    transform: translateY(-1px);
+  }
+
   .pc-sidebar-cta-wrap {
     position: sticky;
     bottom: 12px;

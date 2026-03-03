@@ -73,6 +73,10 @@
         <a href="homeland-connect.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">8</span></span><span>8. 본국연결</span></a>
         <a href="checklist-generator.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>체크리스트</span></a>
       </nav>
+      <div class="pc-sidebar-flow" aria-label="Desktop circulation">
+        <a class="pc-flow-link prev" href="#">이전</a>
+        <a class="pc-flow-link next" href="#">다음</a>
+      </div>
       <div class="pc-sidebar-cta-wrap">
         <a class="pc-sidebar-cta" href="checklist-generator.html">체크리스트로 이동</a>
       </div>
@@ -95,6 +99,29 @@
       link.classList.toggle('active', isActive);
       if (isActive) link.setAttribute('aria-current', 'page');
     });
+
+
+    const flowOrder = [
+      'index.html',
+      'admin-secretary.html',
+      'safe-housing.html',
+      'asset-guide.html',
+      'emergency-rescue.html',
+      'digital-help.html',
+      'roadmaster.html',
+      'practical-conversation.html',
+      'homeland-connect.html',
+      'checklist-generator.html'
+    ];
+    const idx = flowOrder.indexOf(currentPage);
+    if (idx !== -1) {
+      const prev = flowOrder[(idx - 1 + flowOrder.length) % flowOrder.length];
+      const next = flowOrder[(idx + 1) % flowOrder.length];
+      const prevLink = sidebar.querySelector('.pc-flow-link.prev');
+      const nextLink = sidebar.querySelector('.pc-flow-link.next');
+      if (prevLink) prevLink.href = prev;
+      if (nextLink) nextLink.href = next;
+    }
   }
 
 
