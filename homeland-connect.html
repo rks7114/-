@@ -7,35 +7,248 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .homeland-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .homeland-hero .eyebrow,
+    .homeland-hero h1,
+    .homeland-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .homeland-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+
+    .home-card,
+    .docs-card {
+      border-radius: 24px;
+      border: 1px solid #d8e2ef;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+      padding: 0.9rem 16px;
+    }
+
+    .home-card h3,
+    .docs-card h3 {
+      margin: 0 0 0.45rem;
+      color: #001f3f;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .task-item {
+      margin-top: 0.55rem;
+      border: 1px solid #e0e8f3;
+      border-radius: 18px;
+      padding: 0.62rem;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 0.55rem;
+      background: #fff;
+      align-items: start;
+    }
+
+    .task-check {
+      width: 30px;
+      height: 30px;
+      margin-top: 0.1rem;
+      accent-color: #ffb800;
+      cursor: pointer;
+    }
+
+    .task-label {
+      color: #8e6a2f;
+      font-weight: 900;
+      font-size: 0.94rem;
+      display: inline-block;
+      margin-bottom: 0.1rem;
+    }
+
+    .task-line {
+      margin: 0;
+      color: #1f3348;
+    }
+
+    .emph-list {
+      margin: 0;
+      padding-left: 1rem;
+    }
+    .emph-list li { margin: 0.2rem 0; }
+
+    .home-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .home-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .home-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .homeland-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
 </head>
 <body>
-<nav class="lang-tabs" aria-label="언어 전환"><button class="lang-btn" data-set-lang="ko">한국어</button><button class="lang-btn" data-set-lang="ja">日本語</button><button class="lang-btn" data-set-lang="zh">简体中文</button></nav>
-<header class="hero"><p class="eyebrow">8. HOMELAND CONNECT</p><h1>본국연결</h1><p class="hero-copy">한국기관 발급서류 일본 제출 매핑</p></header>
-<main>
-  <section class="principles"><a class="back-link" href="index.html">← 대시보드</a><div class="table-wrap"><table class="fact-table"><thead><tr><th class="col-ko">한국</th><th class="col-ja">日本語</th><th class="col-zh">中文</th></tr></thead><tbody><tr><td class="col-ko">가족관계증명서</td><td class="col-ja"><ruby>親族関係証明書<rt>しんぞくかんけいしょうめいしょ</rt></ruby></td><td class="col-zh"><ruby>亲属关系证明书<rt>qīn shǔ guān xì zhèng míng shū</rt></ruby></td></tr></tbody></table></div></section>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
 
-  <section class="content-card engine-card principles">
-    <h3 class="engine-title">7. 본국 연결 (송금/세무)</h3>
-    <div class="data-row">
-      <div class="icon-circle icon-lime" aria-hidden="true">✈️</div>
-      <div>
-        <strong class="data-strong">해외 송금 및 증여세</strong>
-        <p class="col-ko">KR-JP 개인송금은 은행별 일/월 한도(예: 일 100만엔·월 500만엔) 확인, 고액 송금은 자금출처 증빙 선제 제출.</p>
-        <p class="col-ja"><ruby>日韓送金<rt>にっかんそうきん</rt></ruby>は<ruby>銀行上限<rt>ぎんこうじょうげん</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>し、<ruby>高額送金<rt>こうがくそうきん</rt></ruby>は<ruby>資金源証明<rt>しきんげんしょうめい</rt></ruby>を<ruby>事前提出<rt>じぜんていしゅつ</rt></ruby>。</p>
-        <p class="col-zh">CN: <ruby>韩日汇款需确认银行日/月限额；大额汇款应预先提交资金来源证明<rt>hán rì huì kuǎn xū què rèn yín háng rì/yuè xiàn é; dà é huì kuǎn yīng yù xiān tí jiāo zī jīn lái yuán zhèng míng</rt></ruby>。</p>
+  <header class="hero homeland-hero">
+    <p class="eyebrow">8. HOMELAND CONNECT</p>
+    <h1>본국연결</h1>
+    <p class="hero-copy">한국 정리 체크 · 제출서류 준비</p>
+  </header>
+
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="homeland-grid">
+        <article class="home-card">
+          <h3>한국 휴대폰·우편물 정리</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">휴대폰 회선</span>
+              <p class="task-line">번호 유지/해지 여부 확정 후 로밍·정지·해지 중 하나로 처리</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">우편물 전환</span>
+              <p class="task-line">한국 주소지 우편물 수령 대리인 지정 또는 보관 서비스 신청</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="home-card">
+          <h3>구독 서비스 해지</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">자동결제 점검</span>
+              <p class="task-line">OTT·클라우드·쇼핑 멤버십 자동결제 목록 일괄 점검</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">해지 완료 기록</span>
+              <p class="task-line">해지 확인 메일·영수증 캡처를 클라우드 폴더에 보관</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="home-card">
+          <h3>세금·건강보험 마감</h3>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">세금 마감</span>
+              <p class="task-line">종합소득세/지방세 신고 상태와 체납 여부 최종 확인</p>
+            </span>
+          </label>
+
+          <label class="task-item">
+            <input class="task-check" type="checkbox" />
+            <span>
+              <span class="task-label">건강보험 정리</span>
+              <p class="task-line">건강보험 자격변동 신고 및 납부 정산 내역 확보</p>
+            </span>
+          </label>
+        </article>
+
+        <article class="docs-card">
+          <h3>한국에서 챙겨야 할 서류 목록</h3>
+          <ul class="emph-list">
+            <li>가족관계증명서</li>
+            <li>기본증명서</li>
+            <li>주민등록등본/초본</li>
+            <li>납세증명서·소득금액증명</li>
+            <li>건강보험 자격득실 확인서</li>
+            <li>범죄경력회보서(필요 시)</li>
+          </ul>
+        </article>
       </div>
+    </section>
+
+    <div class="home-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
     </div>
-    <div class="data-row">
-      <div class="icon-circle icon-gold" aria-hidden="true">🧾</div>
-      <div>
-        <strong class="data-strong">증여세 신고 필수 서류 (贈与税)</strong>
-        <p class="col-ko">필수: 송금 영수증, 증여계약서, 가족관계증빙, 수증인 계좌내역, 환율 적용근거.</p>
-        <p class="col-ja"><ruby>必須書類<rt>ひっすしょるい</rt></ruby>：<ruby>送金明細<rt>そうきんめいさい</rt></ruby>・<ruby>贈与契約書<rt>ぞうよけいやくしょ</rt></ruby>・<ruby>親族証明<rt>しんぞくしょうめい</rt></ruby>・<ruby>口座履歴<rt>こうざりれき</rt></ruby>。</p>
-        <p class="col-zh">CN: <ruby>必备材料：汇款凭证、赠与协议、亲属证明、收款账户流水与汇率依据<rt>bì bèi cái liào: huì kuǎn píng zhèng, zèng yǔ xié yì, qīn shǔ zhèng míng, shōu kuǎn zhàng hù liú shuǐ yǔ huì lǜ yī jù</rt></ruby>。</p>
-      </div>
-    </div>
-  </section>
-</main>
-<nav class="mobile-bottom-nav"><a href="index.html">홈</a><a href="admin-secretary.html">행정비서</a><a href="emergency-rescue.html">긴급</a></nav>
-<script src="app.js"></script>
-</body></html>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
