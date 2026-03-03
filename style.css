@@ -2695,6 +2695,55 @@ body:not(.home) .content-card {
   .em-bottom,
   .home-bottom,
   .future-bottom {
-    display: none !important;
+    position: fixed !important;
+    top: 124px;
+    right: 1.25rem;
+    bottom: auto;
+    left: auto;
+    z-index: 42;
+    width: min(280px, calc(100vw - 320px));
+    margin: 0;
+    padding: 0.55rem;
+    border-radius: 16px;
+    border: 1px solid #2f4f73;
+    background: rgba(9, 28, 47, 0.95);
+    box-shadow: 0 14px 30px rgba(0, 12, 24, 0.36);
+    backdrop-filter: blur(6px);
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    justify-content: stretch;
+  }
+
+  .checklist-return > *,
+  .asset-checklist-return > *,
+  .housing-bottom-actions > *,
+  .conversation-bottom > *,
+  .digital-bottom > *,
+  .em-bottom > *,
+  .home-bottom > *,
+  .future-bottom > * {
+    flex: 1 1 120px;
+    min-width: 0;
+  }
+}
+
+
+@media (min-width: 1400px) {
+  .dashboard,
+  .workflow-grid,
+  .finance-grid,
+  .mobile-core-grid,
+  .conversation-grid,
+  .app-grid,
+  .homeland-grid,
+  .timeline,
+  .emergency-grid,
+  .risk-grid,
+  .housing-check-grid,
+  .asset-grid,
+  .menu-grid,
+  .card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 }
