@@ -62,16 +62,16 @@
     sidebar.innerHTML = `
       <h2 class="pc-sidebar-title">JAMGONG JAPAN</h2>
       <nav class="pc-sidebar-menu" aria-label="Desktop menu">
-        <a href="index.html"><span class="pc-nav-ico">🏠</span><span>대시보드</span></a>
-        <a href="admin-secretary.html"><span class="pc-nav-ico">1️⃣</span><span>1. 행정비서</span></a>
-        <a href="safe-housing.html"><span class="pc-nav-ico">2️⃣</span><span>2. 안심주거</span></a>
-        <a href="asset-guide.html"><span class="pc-nav-ico">3️⃣</span><span>3. 자산가이드</span></a>
-        <a href="emergency-rescue.html"><span class="pc-nav-ico">4️⃣</span><span>4. 긴급구조</span></a>
-        <a href="digital-help.html"><span class="pc-nav-ico">5️⃣</span><span>5. 생활편의</span></a>
-        <a href="roadmaster.html"><span class="pc-nav-ico">6️⃣</span><span>6. 로드마스터</span></a>
-        <a href="practical-conversation.html"><span class="pc-nav-ico">7️⃣</span><span>7. 실무회화</span></a>
-        <a href="homeland-connect.html"><span class="pc-nav-ico">8️⃣</span><span>8. 본국연결</span></a>
-        <a href="checklist-generator.html"><span class="pc-nav-ico">✅</span><span>체크리스트</span></a>
+        <a href="index.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-5h-6v5H4a1 1 0 0 1-1-1z"/></svg></span><span>대시보드</span></a>
+        <a href="admin-secretary.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">1</span></span><span>1. 행정비서</span></a>
+        <a href="safe-housing.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">2</span></span><span>2. 안심주거</span></a>
+        <a href="asset-guide.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">3</span></span><span>3. 자산가이드</span></a>
+        <a href="emergency-rescue.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">4</span></span><span>4. 긴급구조</span></a>
+        <a href="digital-help.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">5</span></span><span>5. 생활편의</span></a>
+        <a href="roadmaster.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">6</span></span><span>6. 로드마스터</span></a>
+        <a href="practical-conversation.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">7</span></span><span>7. 실무회화</span></a>
+        <a href="homeland-connect.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">8</span></span><span>8. 본국연결</span></a>
+        <a href="checklist-generator.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>체크리스트</span></a>
       </nav>
       <div class="pc-sidebar-cta-wrap">
         <a class="pc-sidebar-cta" href="checklist-generator.html">체크리스트로 이동</a>

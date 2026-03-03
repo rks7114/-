@@ -2467,6 +2467,25 @@ body:not(.home) .content-card {
     display: inline-flex;
     justify-content: center;
     margin-right: 0.28rem;
+    position: relative;
+    color: #ffd676;
+  }
+
+  .pc-nav-svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  .pc-num {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0.62rem;
+    font-weight: 900;
+    color: #001f3f;
   }
 
   .pc-sidebar-menu a {
@@ -2545,7 +2564,7 @@ body:not(.home) .content-card {
   .housing-check-grid,
   .asset-grid,
   .menu-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
   }
 
   .card,
