@@ -62,6 +62,10 @@ body {
 .hero h1 { margin: 0.35rem 0 0.55rem; font-size: clamp(1.3rem, 5vw, 2rem); }
 .hero-copy { margin: 0 auto; max-width: 980px; }
 
+.mobile-urgent-line {
+  display: none;
+}
+
 main { max-width: 1100px; margin: 0 auto; padding: 0.9rem; }
 
 .principles,
@@ -2562,6 +2566,74 @@ body:not(.home) .content-card {
     filter: brightness(1.03);
     transform: translateY(-1px);
   }
+
+  .smart-widget {
+    margin-top: 0.8rem;
+    border: 1px solid #2e4f72;
+    border-radius: 16px;
+    background: #102a43;
+    padding: 0.6rem;
+  }
+
+  .smart-widget h3 {
+    margin: 0 0 0.5rem;
+    color: #ffd676;
+    font-size: 0.92rem;
+  }
+
+  .smart-list {
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  .smart-item {
+    border-radius: 12px;
+    padding: 0.5rem;
+    border: 1px solid transparent;
+  }
+
+  .smart-item strong {
+    display: block;
+    font-size: 0.82rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .smart-item p {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .smart-item.gold {
+    background: rgba(255, 184, 0, 0.14);
+    border-color: rgba(255, 184, 0, 0.5);
+    color: #ffe6a6;
+  }
+
+  .smart-item.danger {
+    background: rgba(220, 70, 70, 0.2);
+    border-color: rgba(255, 102, 102, 0.65);
+    color: #ffd4d4;
+  }
+
+  .visa-dday-panel {
+    margin-bottom: 0.8rem;
+  }
+
+  .visa-dday-row {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0.6rem 0;
+  }
+
+  .visa-dday-row input {
+    min-height: 42px;
+    border-radius: 10px;
+    border: 1px solid #2f4f73;
+    background: #0f2238;
+    color: #e9f2ff;
+    padding: 0.4rem 0.52rem;
+  }
   main {
     max-width: 1480px;
     padding-left: 1rem;
@@ -2795,5 +2867,22 @@ body:not(.home) .content-card {
   .menu-grid,
   .card-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+
+@media (max-width: 1023px) {
+  .mobile-urgent-line {
+    display: block;
+    margin: 0;
+    padding: 0.52rem 0.8rem;
+    background: #7b1d1d;
+    color: #ffe7e7;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 160, 160, 0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

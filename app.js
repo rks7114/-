@@ -156,11 +156,190 @@
     });
   }
 
+
+  const SMART_KEY = 'jamgong_smart_notice_v1';
+  const CHECKLIST_KEY = 'jg_japan_checklist_v1';
+
+  function toLocalDate(date) {
+    const d = new Date(date);
+    if (Number.isNaN(d.getTime())) return null;
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function fmtDiff(targetDate) {
+    const now = new Date();
+    const diffMs = targetDate.getTime() - now.getTime();
+    const totalMin = Math.max(0, Math.floor(diffMs / 60000));
+    const days = Math.floor(totalMin / 1440);
+    const hours = Math.floor((totalMin % 1440) / 60);
+    const mins = totalMin % 60;
+    return `${days}일 ${hours}시간 ${mins}분`;
+  }
+
+  function loadSmartState() {
+    try {
+      return JSON.parse(localStorage.getItem(SMART_KEY) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function saveSmartState(next) {
+    localStorage.setItem(SMART_KEY, JSON.stringify(next));
+  }
+
+  function loadChecklistState() {
+    try {
+      return JSON.parse(localStorage.getItem(CHECKLIST_KEY) || 'null');
+    } catch {
+      return null;
+    }
+  }
+
+  function computeSmartAlerts() {
+    const smart = loadSmartState();
+    const checklist = loadChecklistState();
+    const arrival = toLocalDate(smart.arrivalDate || checklist?.arrivalDate);
+    const visaExpiry = toLocalDate(smart.visaExpiryDate);
+    const done = checklist?.done || {};
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+
+    const alerts = [];
+
+    if (visaExpiry) {
+      const dday = Math.ceil((visaExpiry.getTime() - now.getTime()) / 86400000);
+      alerts.push({
+        key: 'visa_dday',
+        level: dday <= 30 ? 'danger' : 'gold',
+        text: dday >= 0 ? `비자 만료 D-${dday}` : `비자 만료 ${Math.abs(dday)}일 경과`,
+        remain: dday >= 0 ? `${dday}일 남음` : '즉시 갱신 필요'
+      });
+    }
+
+    if (arrival) {
+      const adminSteps = [
+        { key: 'addr_register', title: '전입 신고', dueOffsetDays: 14 },
+        { key: 'status_confirm', title: '체류자격 신고 점검', dueOffsetDays: 14 },
+        { key: 'phone_setup', title: '통신 개통 정보 확인', dueOffsetDays: 14 }
+      ];
+
+      adminSteps.forEach((step) => {
+        if (done[step.key]) return;
+        const due = new Date(arrival);
+        due.setDate(due.getDate() + step.dueOffsetDays);
+        due.setHours(23, 59, 0, 0);
+        const within14 = due.getTime() - Date.now() <= 14 * 86400000;
+        if (!within14) return;
+        const overdue = due.getTime() < Date.now();
+        alerts.push({
+          key: step.key,
+          level: overdue ? 'danger' : 'gold',
+          text: `행정 신고: ${step.title}`,
+          remain: overdue ? '마감 초과' : `${fmtDiff(due)} 남음`
+        });
+      });
+    }
+
+    return alerts;
+  }
+
+  function ensureFutureVisaPanel() {
+    if (!document.querySelector('.future-hero') || document.querySelector('.visa-dday-panel')) return;
+    const wrap = document.createElement('section');
+    wrap.className = 'visa-dday-panel principles';
+    const smart = loadSmartState();
+    wrap.innerHTML = `
+      <h3>비자 D-Day 설정</h3>
+      <p>미래설계 데이터와 알림 엔진을 연동합니다.</p>
+      <div class="visa-dday-row">
+        <label for="visaExpiryDate">비자 만료일</label>
+        <input id="visaExpiryDate" type="date" value="${smart.visaExpiryDate || ''}" />
+      </div>
+      <button type="button" class="cta-btn" id="saveVisaDday">저장</button>
+    `;
+    const main = document.querySelector('main');
+    if (main) main.prepend(wrap);
+    const input = wrap.querySelector('#visaExpiryDate');
+    const btn = wrap.querySelector('#saveVisaDday');
+    if (btn && input) {
+      btn.addEventListener('click', () => {
+        const state = loadSmartState();
+        state.visaExpiryDate = input.value || '';
+        saveSmartState(state);
+        updateSmartNoticeUi();
+      });
+    }
+  }
+
+  function ensureSmartNoticeUi() {
+    const sidebar = document.querySelector('.pc-sidebar');
+    if (sidebar && !sidebar.querySelector('.smart-widget')) {
+      const widget = document.createElement('section');
+      widget.className = 'smart-widget';
+      widget.innerHTML = `
+        <h3>오늘의 실무 알림</h3>
+        <div class="smart-list" id="smartList"></div>
+      `;
+      sidebar.appendChild(widget);
+    }
+
+    const hero = document.querySelector('header.hero, .golden-streamline-header');
+    if (hero && !document.querySelector('.mobile-urgent-line')) {
+      const line = document.createElement('div');
+      line.className = 'mobile-urgent-line';
+      line.id = 'mobileUrgentLine';
+      hero.insertAdjacentElement('afterend', line);
+    }
+  }
+
+  function updateSmartNoticeUi() {
+    const smart = loadSmartState();
+    const checklist = loadChecklistState();
+    if ((!smart.arrivalDate || !smart.arrivalDate.length) && checklist?.arrivalDate) {
+      smart.arrivalDate = checklist.arrivalDate;
+      saveSmartState(smart);
+    }
+
+    const alerts = computeSmartAlerts();
+    const list = document.getElementById('smartList');
+    if (list) {
+      list.innerHTML = '';
+      if (!alerts.length) {
+        const item = document.createElement('div');
+        item.className = 'smart-item gold';
+        item.innerHTML = '<strong>알림 없음</strong><p>체크리스트 완료 또는 일정 미설정</p>';
+        list.appendChild(item);
+      } else {
+        alerts.slice(0, 5).forEach((alert) => {
+          const item = document.createElement('div');
+          item.className = `smart-item ${alert.level}`;
+          item.innerHTML = `<strong>${alert.text}</strong><p>${alert.remain}</p>`;
+          list.appendChild(item);
+        });
+      }
+    }
+
+    const mobileLine = document.getElementById('mobileUrgentLine');
+    if (mobileLine) {
+      const urgent = alerts.find((x) => x.level === 'danger') || alerts[0];
+      mobileLine.textContent = urgent ? `긴급 일정 · ${urgent.text} · ${urgent.remain}` : '긴급 일정 · 현재 마감 임박 일정 없음';
+    }
+  }
+
   ensureGlobalUi();
   ensureDesktopSidebar();
   ensurePcTopMenu();
+  ensureFutureVisaPanel();
+  ensureSmartNoticeUi();
   updateJapanClock();
+  updateSmartNoticeUi();
   setInterval(updateJapanClock, 30000);
+  setInterval(updateSmartNoticeUi, 60000);
+  window.addEventListener('storage', (e) => {
+    if (e.key === SMART_KEY || e.key === CHECKLIST_KEY) updateSmartNoticeUi();
+  });
 
   const saved = canonical(localStorage.getItem(KEY) || 'ko');
   applyLang(saved);
