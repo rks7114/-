@@ -2506,6 +2506,14 @@ body:not(.home) .content-card {
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
+    line-height: 1.68;
+  }
+
+  .card,
+  .principles,
+  .content-card,
+  .premium-card {
+    padding: clamp(0.95rem, 1.05vw, 1.25rem);
   }
 
 

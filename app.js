@@ -71,6 +71,7 @@
         <a href="roadmaster.html"><span class="pc-nav-ico">6️⃣</span><span>6. 로드마스터</span></a>
         <a href="practical-conversation.html"><span class="pc-nav-ico">7️⃣</span><span>7. 실무회화</span></a>
         <a href="homeland-connect.html"><span class="pc-nav-ico">8️⃣</span><span>8. 본국연결</span></a>
+        <a href="checklist-generator.html"><span class="pc-nav-ico">✅</span><span>체크리스트</span></a>
       </nav>
       <div class="pc-sidebar-cta-wrap">
         <a class="pc-sidebar-cta" href="checklist-generator.html">체크리스트로 이동</a>
