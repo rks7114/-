@@ -7,37 +7,206 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0A192F">
+  <style>
+    html, body { font-size: 16px; line-height: 1.6; }
+    body { background: #071423; }
+
+    .future-hero {
+      background: #FFB800;
+      color: #001f3f;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      min-height: 168px;
+      padding: 1.2rem 1rem 1rem;
+      box-shadow: 0 16px 36px rgba(0, 29, 63, 0.2);
+    }
+    .future-hero .eyebrow,
+    .future-hero h1,
+    .future-hero .hero-copy { color: #001f3f; }
+
+    .lang-tabs .lang-btn {
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    main {
+      max-width: 760px;
+      padding: 0.9rem 0.75rem 9rem;
+    }
+
+    .principles {
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0, 29, 63, 0.14);
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .back-link {
+      min-height: 48px;
+      border-radius: 24px;
+      padding: 0.5rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .timeline {
+      margin-top: 0.65rem;
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-card,
+    .alert-card {
+      border-radius: 24px;
+      border: 1px solid #d8e2ef;
+      background: #fbfbfc;
+      box-shadow: 0 12px 30px rgba(0, 29, 63, 0.14);
+      padding: 0.9rem 16px;
+    }
+
+    .timeline-card h3,
+    .alert-card h3 {
+      margin: 0 0 0.45rem;
+      color: #001f3f;
+      font-size: 1.06rem;
+      font-weight: 900;
+    }
+
+    .time-badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      background: #ffe8a1;
+      color: #001f3f;
+      font-weight: 900;
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-card ul,
+    .alert-card ul { margin: 0; padding-left: 1rem; }
+    .timeline-card li,
+    .alert-card li { margin: 0.12rem 0; color: #1f3348; }
+
+    .alert-input {
+      margin-top: 0.55rem;
+      width: 100%;
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid #ccd9ea;
+      padding: 0.65rem 0.7rem;
+      font-size: 1rem;
+      color: #102a43;
+      background: #fff;
+    }
+
+    .future-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(58px + env(safe-area-inset-bottom));
+      z-index: 28;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(180deg, rgba(7,20,35,0), rgba(7,20,35,0.86) 35%, rgba(7,20,35,0.98));
+    }
+    .future-bottom .cta-btn {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(0, 29, 63, 0.24);
+    }
+
+    @media (min-width: 900px) {
+      .future-bottom {
+        position: static;
+        background: transparent;
+        padding: 0;
+        margin-top: 0.9rem;
+      }
+      main { padding-bottom: 1rem; }
+      .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
 </head>
 <body>
-<nav class="lang-tabs" aria-label="언어 전환"><button class="lang-btn" data-set-lang="ko">한국어</button><button class="lang-btn" data-set-lang="ja">日本語</button><button class="lang-btn" data-set-lang="zh">简体中文</button></nav>
-<header class="hero"><p class="eyebrow">9. FUTURE PLANNING</p><h1>미래설계</h1><p class="hero-copy">정착·진로·장기 설계 로드맵</p></header>
-<main>
-  <section class="principles"><a class="back-link" href="index.html">← 대시보드</a><ul class="steps"><li class="col-ko">지역 다문화 센터 등록</li><li class="col-ja"><ruby>地域多文化<rt>ちいきたぶんか</rt></ruby>センター<ruby>登録<rt>とうろく</rt></ruby></li><li class="col-zh"><ruby>地区多文化中心登记<rt>dì qū duō wén huà zhōng xīn dēng jì</rt></ruby></li></ul></section>
+  <nav class="lang-tabs" aria-label="언어 전환">
+    <button class="lang-btn" data-set-lang="ko" type="button">한국어</button>
+    <button class="lang-btn" data-set-lang="ja" type="button">日本語</button>
+    <button class="lang-btn" data-set-lang="zh" type="button">简体中文</button>
+  </nav>
 
-  <section class="content-card engine-card principles">
-    <h3 class="engine-title">8. 미래 설계 (영주/연금)</h3>
-    <div class="data-row">
-      <div class="icon-circle icon-orange" aria-hidden="true">🎓</div>
-      <div>
-        <strong class="data-strong">영주권 포인트 계산 로직 (永住権ポイント)</strong>
-        <p class="col-ko">고도인재 포인트 = 학력(최대30)+연봉(최대40)+경력(최대20)+연령/자격 가점. 70점 이상 3년, 80점 이상 1년 경로.</p>
-        <p class="col-ja"><ruby>高度人材点数<rt>こうどじんざいてんすう</rt></ruby>は<ruby>学歴<rt>がくれき</rt></ruby>＋<ruby>年収<rt>ねんしゅう</rt></ruby>＋<ruby>実務経験<rt>じつむけいけん</rt></ruby>で<ruby>算定<rt>さんてい</rt></ruby>。70<ruby>点3年<rt>てんさんねん</rt></ruby>、80<ruby>点1年<rt>てんいちねん</rt></ruby>。</p>
-        <p class="col-zh">CN: <ruby>高度人才积分由学历、年收、经验与加分项构成；70分可3年申请，80分可1年申请<rt>gāo dù rén cái jī fēn yóu xué lì, nián shōu, jīng yàn yǔ jiā fēn xiàng gòu chéng; qī shí fēn kě sān nián shēn qǐng, bā shí fēn kě yī nián shēn qǐng</rt></ruby>。</p>
-      </div>
-    </div>
-    <div class="data-row">
-      <div class="icon-circle icon-gold" aria-hidden="true">💴</div>
-      <div>
-        <strong class="data-strong">연금 탈퇴일시금 환급 산식 (脱退一時金)</strong>
-        <p class="col-ko">산식: 표준보수월액 × 지급률(가입월수 구간) × 조정계수. 출국 후 2년 내 청구, 원천세 환급 별도.</p>
-        <p class="col-ja"><ruby>算式<rt>さんしき</rt></ruby>：<ruby>標準報酬月額<rt>ひょうじゅんほうしゅうげつがく</rt></ruby>×<ruby>給付率<rt>きゅうふりつ</rt></ruby>×<ruby>係数<rt>けいすう</rt></ruby>。<ruby>出国後2年以内<rt>しゅっこくごにねんいない</rt></ruby>に<ruby>請求<rt>せいきゅう</rt></ruby>。</p>
-        <p class="col-zh">CN: <ruby>计算式：标准报酬月额×给付率×调整系数；需在离境后2年内申请，预扣税可另行退还<rt>jì suàn shì: biāo zhǔn bào chóu yuè é × gěi fù lǜ × tiáo zhěng xì shù; xū zài lí jìng hòu liǎng nián nèi shēn qǐng, yù kòu shuì kě lìng xíng tuì huán</rt></ruby>。</p>
-      </div>
-    </div>
-  </section>
+  <header class="hero future-hero">
+    <p class="eyebrow">9. FUTURE PLANNING</p>
+    <h1>미래설계</h1>
+    <p class="hero-copy">장기 정착 타임라인 · 중요 일정 기록</p>
+  </header>
 
-  <div class="coming-soon-banner"><h2><span class="col-ko">잼공 오라클(Jamgong Oracle)</span> <span class="coming-label">Coming Soon</span><span class="col-ja"><ruby>ジャムゴン<rt>じゃむごん</rt></ruby>オラクル(Jamgong Oracle) <span class="coming-label">Coming Soon</span></span><span class="col-zh"><ruby>匠工甲骨<rt>jiàng gōng jiǎ gǔ</rt></ruby>(Jamgong Oracle) <span class="coming-label">Coming Soon</span></span></h2><p class="col-ko">하이엔드 운세 서비스를 준비 중입니다.</p><p class="col-ja"><ruby>準備中<rt>じゅんびちゅう</rt></ruby> (Premium Service)</p><p class="col-zh"><ruby>准备中<rt>zhǔnbèi zhōng</rt></ruby> (即将推出)</p></div>
-</main>
-<nav class="mobile-bottom-nav"><a href="index.html">홈</a><a href="admin-secretary.html">행정비서</a><a href="emergency-rescue.html">긴급</a></nav>
-<script src="app.js"></script>
-</body></html>
+  <main>
+    <section class="principles">
+      <a class="back-link" href="index.html">← 대시보드</a>
+
+      <div class="timeline">
+        <article class="timeline-card">
+          <span class="time-badge">비자 갱신 절차</span>
+          <h3>체류기간 만료 전 준비</h3>
+          <ul>
+            <li>재류기간 만료 전 서류 체크리스트 확정</li>
+            <li>재직증명·소득증빙·납세증명 최신본 확보</li>
+            <li>입국관리국 예약 후 갱신 신청 접수</li>
+          </ul>
+        </article>
+
+        <article class="timeline-card">
+          <span class="time-badge">전직 신고 의무</span>
+          <h3>소속기관 변경 신고</h3>
+          <ul>
+            <li>회사 퇴사/입사 시 출입국 신고 의무 확인</li>
+            <li>전자신고 또는 우편 신고 경로 선택</li>
+            <li>고용계약서·재류카드 사본 보관</li>
+          </ul>
+        </article>
+
+        <article class="timeline-card">
+          <span class="time-badge">자산 형성</span>
+          <h3>NISA 중심 장기 운용</h3>
+          <ul>
+            <li>NISA 계좌 개설 가능 여부 은행/증권사 확인</li>
+            <li>적립식 ETF·인덱스 비중 사전 설정</li>
+            <li>비상자금·생활비 계좌와 투자계좌 분리</li>
+          </ul>
+        </article>
+
+        <article class="alert-card">
+          <span class="time-badge">중요 일정 알림</span>
+          <h3>개인 일정 기록</h3>
+          <ul>
+            <li>비자 만료일, 신고 마감일, 납부일을 한곳에 기록</li>
+            <li>월별 리마인더 주기를 2회 이상 설정</li>
+          </ul>
+          <input class="alert-input" type="text" placeholder="예: 11월 1일 비자 갱신 서류 제출" />
+          <input class="alert-input" type="text" placeholder="예: 매월 25일 NISA 자동이체 확인" />
+        </article>
+      </div>
+    </section>
+
+    <div class="future-bottom">
+      <a class="cta-btn" href="checklist-generator.html">체크리스트로 돌아가기</a>
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav">
+    <a href="index.html">홈</a>
+    <a href="admin-secretary.html">행정비서</a>
+    <a href="emergency-rescue.html">긴급</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
