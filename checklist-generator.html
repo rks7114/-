@@ -102,6 +102,7 @@
     </div>
 
     <div class="jg-card" id="panel_list" style="display:none;"><div class="jg-list" id="taskList"></div></div>
+    <section id="chairman-data-slot"></section>
     <div class="jg-footer"><div id="t_footer">체크 상태는 이 기기 브라우저에 저장됩니다(localStorage).</div></div>
   </div>
 <script>
@@ -158,5 +159,6 @@ el('btn_ics').addEventListener('click',()=>{const s=loadState();if(s?.tasks?.len
   window.addEventListener('load', openByHash);
 })();
 </script>
+  <script src="app.js"></script>
 </body>
 </html>

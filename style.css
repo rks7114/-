@@ -2886,3 +2886,24 @@ body:not(.home) .content-card {
     text-overflow: ellipsis;
   }
 }
+
+
+.chairman-data-hub {
+  margin-top: 1rem;
+}
+
+.chairman-grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.chairman-data-hub h3 {
+  margin-top: 0;
+}
+
+.chairman-data-hub ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.72;
+}

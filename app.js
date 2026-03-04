@@ -26,7 +26,11 @@
 
   // 시스템 원칙 반영: 화면 텍스트에 YYYY-MM-DD 같은 날짜 표기를 직접 노출하지 않는다.
   function stripDateNotation(text) {
-    return String(text || '').replace(/\b\d{4}[./-]\d{1,2}[./-]\d{1,2}\b/g, '기준일');
+    return String(text || '')
+      .replace(/\b\d{4}[./-]\d{1,2}[./-]\d{1,2}\b/g, '기준일')
+      .replace(/\b\d{1,2}[./-]\d{1,2}\b/g, '기준일')
+      .replace(/\d{4}년\s*\d{1,2}월\s*\d{1,2}일/g, '기준일')
+      .replace(/(기준일)([.!?。！？]*)$/g, '$1');
   }
 
   function bindLanguageSwitchers() {
@@ -38,6 +42,56 @@
       event.preventDefault();
       applyLang(raw);
     });
+  }
+
+
+  const CHAIRMAN_DATA = {
+    hospitalInsurance: [
+      { ko: '응급 시 119 연락 후 가까운 구급 가능 병원으로 이동', ja: '緊急時は119へ連絡し、受入可能な病院へ移動', zh: '紧急情况先拨打119并前往可接收医院' },
+      { ko: '국민건강보험·연금 가입 상태를 구청/회사에서 즉시 확인', ja: '国民健康保険・年金の加入状態を区役所/会社で確認', zh: '在区役所或公司核对健康保险与年金加入状态' },
+      { ko: '진료 전 본인확인(재류카드/여권)과 보험증 지참', ja: '受診前に本人確認書類と保険証を持参', zh: '就诊前携带在留卡或护照及保险证' }
+    ],
+    jobGuide: [
+      { ko: '채용공고의 비자 요건과 직무 일본어 수준을 먼저 체크', ja: '求人票の在留資格要件と日本語レベルを先に確認', zh: '优先确认招聘信息中的签证要求与日语等级' },
+      { ko: '이력서·경력기술서·포트폴리오를 직무별 버전으로 관리', ja: '履歴書・職務経歴書・ポートフォリオを職種別に管理', zh: '按岗位管理简历、经历说明和作品集版本' },
+      { ko: '내정 후 근로조건통지서와 사회보험 반영 여부를 점검', ja: '内定後は労働条件通知書と社会保険反映を点検', zh: '拿到录用后核对劳动条件通知书与社保登记' }
+    ],
+    foreignerFaq: [
+      { q: { ko: '주소 변경 신고는 언제 해야 하나요', ja: '住所変更届はいつまでに必要ですか', zh: '住址变更需要何时申报' }, a: { ko: '전입 후 빠르게 구청에서 처리하고 증빙을 보관하세요', ja: '転入後は速やかに区役所で手続きし控えを保管', zh: '迁入后尽快到区役所办理并保留凭证' } },
+      { q: { ko: '아르바이트 가능 시간은 어떻게 확인하나요', ja: 'アルバイト可能時間はどう確認しますか', zh: '如何确认可打工时长' }, a: { ko: '체류자격별 허용 조건을 입국관리 안내 기준으로 확인하세요', ja: '在留資格ごとの許可条件を入管案内で確認', zh: '按在留资格对应条件在入管指南中确认' } },
+      { q: { ko: '의료 통역이 필요하면 어떻게 하나요', ja: '医療通訳が必要な場合はどうしますか', zh: '需要医疗口译时怎么办' }, a: { ko: '지자체 다국어 지원 창구 또는 병원 통역 연계를 이용하세요', ja: '自治体の多言語窓口または病院通訳連携を利用', zh: '使用政府多语服务窗口或医院口译联动' } }
+    ]
+  };
+
+  function ensureChairmanDataHub() {
+    const main = document.querySelector('main');
+    if (!main) return;
+    let slot = document.getElementById('chairman-data-slot');
+    if (!slot) {
+      slot = document.createElement('section');
+      slot.id = 'chairman-data-slot';
+      main.appendChild(slot);
+    }
+    if (slot.dataset.ready === '1') return;
+
+    const li = (item) => `<li>${stripDateNotation(item[canonical(localStorage.getItem(KEY) || 'ko')] || item.ko || '')}</li>`;
+    const faq = (item) => {
+      const lang = canonical(localStorage.getItem(KEY) || 'ko');
+      const q = stripDateNotation(item.q[lang] || item.q.ko || '');
+      const a = stripDateNotation(item.a[lang] || item.a.ko || '');
+      return `<li><strong>Q.</strong> ${q}<br><strong>A.</strong> ${a}</li>`;
+    };
+
+    slot.className = 'principles chairman-data-hub';
+    slot.innerHTML = `
+      <h2>회장님 데이터 허브</h2>
+      <div class="chairman-grid">
+        <article class="content-card"><h3>병원·보험</h3><ul>${CHAIRMAN_DATA.hospitalInsurance.map(li).join('')}</ul></article>
+        <article class="content-card"><h3>취업 가이드</h3><ul>${CHAIRMAN_DATA.jobGuide.map(li).join('')}</ul></article>
+        <article class="content-card"><h3>외국인 FAQ</h3><ul>${CHAIRMAN_DATA.foreignerFaq.map(faq).join('')}</ul></article>
+      </div>
+    `;
+    slot.dataset.ready = '1';
   }
 
 
@@ -359,8 +413,14 @@
 
   const saved = canonical(localStorage.getItem(KEY) || 'ko');
   applyLang(saved);
+  ensureChairmanDataHub();
 
-  window.switchLang = (lang) => applyLang(lang);
+  window.switchLang = (lang) => {
+    applyLang(lang);
+    const slot = document.getElementById('chairman-data-slot');
+    if (slot) slot.dataset.ready = '0';
+    ensureChairmanDataHub();
+  };
   bindLanguageSwitchers();
 
 
@@ -459,7 +519,7 @@
   }
 
   function markHomeLogos() {
-    document.querySelectorAll('.pc-sidebar-title, .hero .eyebrow, .dashboard-hero .eyebrow, .golden-streamline-header h1, .roadmaster-page .header-content h1').forEach((el) => {
+    document.querySelectorAll('.pc-sidebar-title, .hero .eyebrow, .dashboard-hero .eyebrow, .golden-streamline-header h1, .roadmaster-page .header-content h1, .hero h1, .dashboard-hero h1, .jg-titlebar h1').forEach((el) => {
       el.setAttribute('data-home-logo', 'true');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
       el.style.cursor = 'pointer';
@@ -469,7 +529,7 @@
   function injectInlineHomeOnclick() {
     const js = "location.href='index.html'";
     const targets = document.querySelectorAll(
-      'a.back-link, a[data-home-link], a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"], nav.mobile-bottom-nav a:first-child, [data-home-logo="true"]'
+      'a.back-link, a[data-home-link], #t_back, a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"], nav.mobile-bottom-nav a:first-child, [data-home-logo="true"]'
     );
     targets.forEach((el) => {
       if (el.matches('a')) el.setAttribute('href', 'index.html');
@@ -487,7 +547,7 @@
       });
     });
 
-    document.querySelectorAll('a.back-link, a[data-home-link], a[href="/"], a[href="./"], a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"]').forEach((a) => {
+    document.querySelectorAll('a.back-link, a[data-home-link], #t_back, a[href="/"], a[href="./"], a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"]').forEach((a) => {
       if (!a.getAttribute('href') || a.getAttribute('href') === '#') return;
       a.setAttribute('href', 'index.html');
     });
@@ -497,7 +557,7 @@
   }
 
   function bindHomeRouting() {
-    const HOME_SELECTOR = 'a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link], [data-home-logo="true"]';
+    const HOME_SELECTOR = 'a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link], #t_back, [data-home-logo="true"]';
 
     const routeHomeNow = (target, event) => {
       if (!target) return;
