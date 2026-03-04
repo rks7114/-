@@ -16,7 +16,7 @@
       },
       dataHub: { title: '회장님 데이터 허브', hospital: '병원·보험', job: '취업 가이드', faq: '외국인 FAQ' },
       visa: { title: '비자 D-Day 설정', desc: '미래설계 데이터와 알림 엔진을 연동합니다.', label: '비자 만료일', save: '저장' },
-      smart: { title: '오늘의 실무 알림', noneTitle: '알림 없음', noneDesc: '체크리스트 완료 또는 일정 미설정' }
+      smart: { title: '오늘의 실무 알림', noneTitle: '알림 없음', noneDesc: '체크리스트 완료 또는 일정 미설정' }, quick: { kr: 'KR', jp: 'JP', cn: 'CN' }, cat: { hospitalInsurance: '병원·보험', jobGuide: '취업 가이드', foreignerFaq: '외국인 FAQ' }
     },
     ja: {
       nav: {
@@ -26,7 +26,7 @@
       },
       dataHub: { title: '会長データハブ', hospital: '病院・保険', job: '就職ガイド', faq: '外国人FAQ' },
       visa: { title: 'ビザ D-Day 設定', desc: '未来設計データと通知エンジンを連動します。', label: 'ビザ満了日', save: '保存' },
-      smart: { title: '本日の実務通知', noneTitle: '通知なし', noneDesc: 'チェックリスト完了または日程未設定' }
+      smart: { title: '本日の実務通知', noneTitle: '通知なし', noneDesc: 'チェックリスト完了または日程未設定' }, quick: { kr: 'KR', jp: 'JP', cn: 'CN' }, cat: { hospitalInsurance: '病院・保険', jobGuide: '就職ガイド', foreignerFaq: '外国人FAQ' }
     },
     zh: {
       nav: {
@@ -36,7 +36,7 @@
       },
       dataHub: { title: '会长数据中心', hospital: '医院·保险', job: '就业指南', faq: '外国人FAQ' },
       visa: { title: '签证 D-Day 设置', desc: '联动未来规划数据与提醒引擎。', label: '签证到期日', save: '保存' },
-      smart: { title: '今日实务提醒', noneTitle: '暂无提醒', noneDesc: '清单已完成或未设定日程' }
+      smart: { title: '今日实务提醒', noneTitle: '暂无提醒', noneDesc: '清单已完成或未设定日程' }, quick: { kr: 'KR', jp: 'JP', cn: 'CN' }, cat: { hospitalInsurance: '医院·保险', jobGuide: '就业指南', foreignerFaq: '外国人FAQ' }
     }
   };
 
@@ -124,12 +124,33 @@
     slot.className = 'principles chairman-data-hub';
     slot.innerHTML = `
       <h2>${pack.dataHub.title}</h2>
-      <div class="chairman-grid">
-        <article class="content-card"><h3>${pack.dataHub.hospital}</h3><ul>${CHAIRMAN_DATA.hospitalInsurance.map(li).join('')}</ul></article>
-        <article class="content-card"><h3>${pack.dataHub.job}</h3><ul>${CHAIRMAN_DATA.jobGuide.map(li).join('')}</ul></article>
-        <article class="content-card"><h3>${pack.dataHub.faq}</h3><ul>${CHAIRMAN_DATA.foreignerFaq.map(faq).join('')}</ul></article>
+      <div class="chairman-cats" role="tablist" aria-label="Chairman categories">
+        <button type="button" class="chairman-cat active" data-chair-cat="hospitalInsurance">${pack.cat.hospitalInsurance}</button>
+        <button type="button" class="chairman-cat" data-chair-cat="jobGuide">${pack.cat.jobGuide}</button>
+        <button type="button" class="chairman-cat" data-chair-cat="foreignerFaq">${pack.cat.foreignerFaq}</button>
       </div>
+      <div class="chairman-grid" id="chairmanCatContent"></div>
     `;
+
+    const content = slot.querySelector('#chairmanCatContent');
+    const renderCategory = (cat) => {
+      if (!content) return;
+      const key = cat in CHAIRMAN_DATA ? cat : 'hospitalInsurance';
+      if (key === 'foreignerFaq') {
+        content.innerHTML = `<article class="content-card"><h3>${pack.cat.foreignerFaq}</h3><ul>${CHAIRMAN_DATA.foreignerFaq.map(faq).join('')}</ul></article>`;
+      } else if (key === 'jobGuide') {
+        content.innerHTML = `<article class="content-card"><h3>${pack.cat.jobGuide}</h3><ul>${CHAIRMAN_DATA.jobGuide.map(li).join('')}</ul></article>`;
+      } else {
+        content.innerHTML = `<article class="content-card"><h3>${pack.cat.hospitalInsurance}</h3><ul>${CHAIRMAN_DATA.hospitalInsurance.map(li).join('')}</ul></article>`;
+      }
+      slot.querySelectorAll('.chairman-cat').forEach((btn) => btn.classList.toggle('active', btn.getAttribute('data-chair-cat') === key));
+    };
+
+    slot.querySelectorAll('.chairman-cat').forEach((btn) => {
+      btn.addEventListener('click', () => renderCategory(btn.getAttribute('data-chair-cat')));
+    });
+
+    renderCategory(slot.dataset.cat || 'hospitalInsurance');
     slot.dataset.ready = '1';
   }
 
@@ -155,6 +176,11 @@
     const smartTitle = document.querySelector('.smart-widget h3');
     if (smartTitle) smartTitle.textContent = pack.smart.title;
 
+    document.querySelectorAll('[data-quick-key]').forEach((el) => {
+      const key = el.getAttribute('data-quick-key');
+      if (pack.quick[key]) el.textContent = pack.quick[key];
+    });
+
     const visaPanel = document.querySelector('.visa-dday-panel');
     if (visaPanel) {
       const t = visaPanel.querySelector('[data-i18n-key="visa-title"]');
@@ -170,6 +196,19 @@
     const slot = document.getElementById('chairman-data-slot');
     if (slot) slot.dataset.ready = '0';
     ensureChairmanDataHub(lang);
+  }
+
+
+  function ensureQuickLangIcons() {
+    if (!document.body || document.querySelector('.quick-lang-icons')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'quick-lang-icons';
+    wrap.innerHTML = `
+      <button type="button" class="quick-lang-btn" data-set-lang="ko" aria-label="Korean">🇰🇷 <span data-quick-key="kr">KR</span></button>
+      <button type="button" class="quick-lang-btn" data-set-lang="ja" aria-label="Japanese">🇯🇵 <span data-quick-key="jp">JP</span></button>
+      <button type="button" class="quick-lang-btn" data-set-lang="zh" aria-label="Chinese">🇨🇳 <span data-quick-key="cn">CN</span></button>
+    `;
+    document.body.prepend(wrap);
   }
 
 
@@ -477,6 +516,7 @@
     }
   }
 
+  ensureQuickLangIcons();
   ensureGlobalUi();
   ensureDesktopSidebar();
   ensurePcTopMenu();
