@@ -6,6 +6,44 @@
     return aliases[String(lang || '').toLowerCase()] || 'ko';
   }
 
+
+  const LANGUAGE_PACK = {
+    ko: {
+      nav: {
+        dashboard: '대시보드', admin: '1. 행정비서', housing: '2. 안심주거', asset: '3. 자산가이드', emergency: '4. 긴급구조',
+        digital: '5. 생활편의', roadmaster: '6. 로드마스터', conversation: '7. 실무회화', homeland: '8. 본국연결', checklist: '체크리스트',
+        future: '미래설계', prev: '이전', next: '다음', checklistCta: '체크리스트로 이동', home: '홈'
+      },
+      dataHub: { title: '회장님 데이터 허브', hospital: '병원·보험', job: '취업 가이드', faq: '외국인 FAQ' },
+      visa: { title: '비자 D-Day 설정', desc: '미래설계 데이터와 알림 엔진을 연동합니다.', label: '비자 만료일', save: '저장' },
+      smart: { title: '오늘의 실무 알림', noneTitle: '알림 없음', noneDesc: '체크리스트 완료 또는 일정 미설정' }
+    },
+    ja: {
+      nav: {
+        dashboard: 'ダッシュボード', admin: '1. 行政秘書', housing: '2. 安心住居', asset: '3. 資産ガイド', emergency: '4. 緊急救助',
+        digital: '5. 生活便利', roadmaster: '6. ロードマスター', conversation: '7. 実務会話', homeland: '8. 本国連携', checklist: 'チェックリスト',
+        future: '未来設計', prev: '前へ', next: '次へ', checklistCta: 'チェックリストへ移動', home: 'ホーム'
+      },
+      dataHub: { title: '会長データハブ', hospital: '病院・保険', job: '就職ガイド', faq: '外国人FAQ' },
+      visa: { title: 'ビザ D-Day 設定', desc: '未来設計データと通知エンジンを連動します。', label: 'ビザ満了日', save: '保存' },
+      smart: { title: '本日の実務通知', noneTitle: '通知なし', noneDesc: 'チェックリスト完了または日程未設定' }
+    },
+    zh: {
+      nav: {
+        dashboard: '仪表盘', admin: '1. 行政秘书', housing: '2. 安心住房', asset: '3. 资产指南', emergency: '4. 紧急救助',
+        digital: '5. 生活便利', roadmaster: '6. 路线总览', conversation: '7. 实务会话', homeland: '8. 本国连接', checklist: '清单',
+        future: '未来规划', prev: '上一步', next: '下一步', checklistCta: '前往清单', home: '首页'
+      },
+      dataHub: { title: '会长数据中心', hospital: '医院·保险', job: '就业指南', faq: '外国人FAQ' },
+      visa: { title: '签证 D-Day 设置', desc: '联动未来规划数据与提醒引擎。', label: '签证到期日', save: '保存' },
+      smart: { title: '今日实务提醒', noneTitle: '暂无提醒', noneDesc: '清单已完成或未设定日程' }
+    }
+  };
+
+  function getPack(lang) {
+    return LANGUAGE_PACK[canonical(lang)] || LANGUAGE_PACK.ko;
+  }
+
   function updateOracleMessages(lang) {
     document.querySelectorAll('.oracle-alert [data-lang]').forEach((el) => {
       el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
@@ -21,6 +59,7 @@
       b.classList.toggle('active', canonical(b.getAttribute('data-set-lang')) === lang);
     });
     updateOracleMessages(lang);
+    applyLanguagePack(lang);
     document.dispatchEvent(new CustomEvent('jamgong:langchange', { detail: { lang } }));
   }
 
@@ -63,7 +102,7 @@
     ]
   };
 
-  function ensureChairmanDataHub() {
+  function ensureChairmanDataHub(langInput) {
     const main = document.querySelector('main');
     if (!main) return;
     let slot = document.getElementById('chairman-data-slot');
@@ -72,11 +111,11 @@
       slot.id = 'chairman-data-slot';
       main.appendChild(slot);
     }
-    if (slot.dataset.ready === '1') return;
+    const lang = canonical(langInput || localStorage.getItem(KEY) || 'ko');
+    const pack = getPack(lang);
 
-    const li = (item) => `<li>${stripDateNotation(item[canonical(localStorage.getItem(KEY) || 'ko')] || item.ko || '')}</li>`;
+    const li = (item) => `<li>${stripDateNotation(item[lang] || item.ko || '')}</li>`;
     const faq = (item) => {
-      const lang = canonical(localStorage.getItem(KEY) || 'ko');
       const q = stripDateNotation(item.q[lang] || item.q.ko || '');
       const a = stripDateNotation(item.a[lang] || item.a.ko || '');
       return `<li><strong>Q.</strong> ${q}<br><strong>A.</strong> ${a}</li>`;
@@ -84,14 +123,53 @@
 
     slot.className = 'principles chairman-data-hub';
     slot.innerHTML = `
-      <h2>회장님 데이터 허브</h2>
+      <h2>${pack.dataHub.title}</h2>
       <div class="chairman-grid">
-        <article class="content-card"><h3>병원·보험</h3><ul>${CHAIRMAN_DATA.hospitalInsurance.map(li).join('')}</ul></article>
-        <article class="content-card"><h3>취업 가이드</h3><ul>${CHAIRMAN_DATA.jobGuide.map(li).join('')}</ul></article>
-        <article class="content-card"><h3>외국인 FAQ</h3><ul>${CHAIRMAN_DATA.foreignerFaq.map(faq).join('')}</ul></article>
+        <article class="content-card"><h3>${pack.dataHub.hospital}</h3><ul>${CHAIRMAN_DATA.hospitalInsurance.map(li).join('')}</ul></article>
+        <article class="content-card"><h3>${pack.dataHub.job}</h3><ul>${CHAIRMAN_DATA.jobGuide.map(li).join('')}</ul></article>
+        <article class="content-card"><h3>${pack.dataHub.faq}</h3><ul>${CHAIRMAN_DATA.foreignerFaq.map(faq).join('')}</ul></article>
       </div>
     `;
     slot.dataset.ready = '1';
+  }
+
+
+  function applyLanguagePack(langInput) {
+    const lang = canonical(langInput || localStorage.getItem(KEY) || 'ko');
+    const pack = getPack(lang);
+
+    document.querySelectorAll('[data-nav-key]').forEach((el) => {
+      const key = el.getAttribute('data-nav-key');
+      if (pack.nav[key]) el.textContent = stripDateNotation(pack.nav[key]);
+    });
+
+    document.querySelectorAll('nav.mobile-bottom-nav a').forEach((a, idx) => {
+      const href = a.getAttribute('href') || '';
+      if (idx == 0 || href.includes('index.html')) a.textContent = pack.nav.home;
+      else if (href.includes('admin-secretary')) a.textContent = pack.nav.admin;
+      else if (href.includes('emergency-rescue')) a.textContent = pack.nav.emergency;
+      else if (href.includes('asset-guide')) a.textContent = pack.nav.asset;
+      else if (href.includes('practical-conversation')) a.textContent = pack.nav.conversation;
+    });
+
+    const smartTitle = document.querySelector('.smart-widget h3');
+    if (smartTitle) smartTitle.textContent = pack.smart.title;
+
+    const visaPanel = document.querySelector('.visa-dday-panel');
+    if (visaPanel) {
+      const t = visaPanel.querySelector('[data-i18n-key="visa-title"]');
+      const d = visaPanel.querySelector('[data-i18n-key="visa-desc"]');
+      const l = visaPanel.querySelector('[data-i18n-key="visa-label"]');
+      const b = visaPanel.querySelector('[data-i18n-key="visa-save"]');
+      if (t) t.textContent = pack.visa.title;
+      if (d) d.textContent = pack.visa.desc;
+      if (l) l.textContent = pack.visa.label;
+      if (b) b.textContent = pack.visa.save;
+    }
+
+    const slot = document.getElementById('chairman-data-slot');
+    if (slot) slot.dataset.ready = '0';
+    ensureChairmanDataHub(lang);
   }
 
 
@@ -132,23 +210,23 @@
     sidebar.innerHTML = `
       <h2 class="pc-sidebar-title">JAMGONG JAPAN</h2>
       <nav class="pc-sidebar-menu" aria-label="Desktop menu">
-        <a href="index.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-5h-6v5H4a1 1 0 0 1-1-1z"/></svg></span><span>대시보드</span></a>
-        <a href="admin-secretary.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">1</span></span><span>1. 행정비서</span></a>
-        <a href="safe-housing.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">2</span></span><span>2. 안심주거</span></a>
-        <a href="asset-guide.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">3</span></span><span>3. 자산가이드</span></a>
-        <a href="emergency-rescue.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">4</span></span><span>4. 긴급구조</span></a>
-        <a href="digital-help.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">5</span></span><span>5. 생활편의</span></a>
-        <a href="roadmaster.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">6</span></span><span>6. 로드마스터</span></a>
-        <a href="practical-conversation.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">7</span></span><span>7. 실무회화</span></a>
-        <a href="homeland-connect.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">8</span></span><span>8. 본국연결</span></a>
-        <a href="checklist-generator.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>체크리스트</span></a>
+        <a href="index.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-5h-6v5H4a1 1 0 0 1-1-1z"/></svg></span><span data-nav-key="dashboard">대시보드</span></a>
+        <a href="admin-secretary.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">1</span></span><span data-nav-key="admin">1. 행정비서</span></a>
+        <a href="safe-housing.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">2</span></span><span data-nav-key="housing">2. 안심주거</span></a>
+        <a href="asset-guide.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">3</span></span><span data-nav-key="asset">3. 자산가이드</span></a>
+        <a href="emergency-rescue.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">4</span></span><span data-nav-key="emergency">4. 긴급구조</span></a>
+        <a href="digital-help.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">5</span></span><span data-nav-key="digital">5. 생활편의</span></a>
+        <a href="roadmaster.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">6</span></span><span data-nav-key="roadmaster">6. 로드마스터</span></a>
+        <a href="practical-conversation.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">7</span></span><span data-nav-key="conversation">7. 실무회화</span></a>
+        <a href="homeland-connect.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="6"/></svg><span class="pc-num">8</span></span><span data-nav-key="homeland">8. 본국연결</span></a>
+        <a href="checklist-generator.html"><span class="pc-nav-ico"><svg class="pc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7 10 17l-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-nav-key="checklist">체크리스트</span></a>
       </nav>
       <div class="pc-sidebar-flow" aria-label="Desktop circulation">
-        <a class="pc-flow-link prev" href="#">이전</a>
-        <a class="pc-flow-link next" href="#">다음</a>
+        <a class="pc-flow-link prev" data-nav-key="prev" href="#">이전</a>
+        <a class="pc-flow-link next" data-nav-key="next" href="#">다음</a>
       </div>
       <div class="pc-sidebar-cta-wrap">
-        <a class="pc-sidebar-cta" href="checklist-generator.html">체크리스트로 이동</a>
+        <a class="pc-sidebar-cta" data-nav-key="checklistCta" href="checklist-generator.html">체크리스트로 이동</a>
       </div>
     `;
     document.body.appendChild(sidebar);
@@ -202,10 +280,10 @@
     bar.className = 'pc-top-menu';
     bar.innerHTML = `
       <div class="pc-top-menu-inner">
-        <a href="index.html">대시보드</a>
-        <a href="roadmaster.html">로드마스터</a>
-        <a href="future-planning.html">미래설계</a>
-        <a href="checklist-generator.html">체크리스트</a>
+        <a href="index.html" data-nav-key="dashboard">대시보드</a>
+        <a href="roadmaster.html" data-nav-key="roadmaster">로드마스터</a>
+        <a href="future-planning.html" data-nav-key="future">미래설계</a>
+        <a href="checklist-generator.html" data-nav-key="checklist">체크리스트</a>
       </div>
     `;
     document.body.appendChild(bar);
@@ -321,13 +399,13 @@
     wrap.className = 'visa-dday-panel principles';
     const smart = loadSmartState();
     wrap.innerHTML = `
-      <h3>비자 D-Day 설정</h3>
-      <p>미래설계 데이터와 알림 엔진을 연동합니다.</p>
+      <h3 data-i18n-key="visa-title">비자 D-Day 설정</h3>
+      <p data-i18n-key="visa-desc">미래설계 데이터와 알림 엔진을 연동합니다.</p>
       <div class="visa-dday-row">
-        <label for="visaExpiryDate">비자 만료일</label>
+        <label data-i18n-key="visa-label" for="visaExpiryDate">비자 만료일</label>
         <input id="visaExpiryDate" type="date" value="${smart.visaExpiryDate || ''}" />
       </div>
-      <button type="button" class="cta-btn" id="saveVisaDday">저장</button>
+      <button type="button" class="cta-btn" data-i18n-key="visa-save" id="saveVisaDday">저장</button>
     `;
     const main = document.querySelector('main');
     if (main) main.prepend(wrap);
@@ -349,7 +427,7 @@
       const widget = document.createElement('section');
       widget.className = 'smart-widget';
       widget.innerHTML = `
-        <h3>오늘의 실무 알림</h3>
+        <h3 data-i18n-key="smart-title">오늘의 실무 알림</h3>
         <div class="smart-list" id="smartList"></div>
       `;
       sidebar.appendChild(widget);
@@ -379,7 +457,8 @@
       if (!alerts.length) {
         const item = document.createElement('div');
         item.className = 'smart-item gold';
-        item.innerHTML = '<strong>알림 없음</strong><p>체크리스트 완료 또는 일정 미설정</p>';
+        const pack = getPack(canonical(localStorage.getItem(KEY) || 'ko'));
+        item.innerHTML = `<strong>${pack.smart.noneTitle}</strong><p>${pack.smart.noneDesc}</p>`;
         list.appendChild(item);
       } else {
         alerts.slice(0, 5).forEach((alert) => {
@@ -413,14 +492,9 @@
 
   const saved = canonical(localStorage.getItem(KEY) || 'ko');
   applyLang(saved);
-  ensureChairmanDataHub();
+  ensureChairmanDataHub(saved);
 
-  window.switchLang = (lang) => {
-    applyLang(lang);
-    const slot = document.getElementById('chairman-data-slot');
-    if (slot) slot.dataset.ready = '0';
-    ensureChairmanDataHub();
-  };
+  window.switchLang = (lang) => applyLang(lang);
   bindLanguageSwitchers();
 
 
