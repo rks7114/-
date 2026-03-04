@@ -456,6 +456,14 @@
     window.location.assign(new URL('index.html', window.location.href).toString());
   }
 
+  function markHomeLogos() {
+    document.querySelectorAll('.pc-sidebar-title, .hero .eyebrow, .dashboard-hero .eyebrow, .golden-streamline-header h1').forEach((el) => {
+      el.setAttribute('data-home-logo', 'true');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+      el.style.cursor = 'pointer';
+    });
+  }
+
   function enforceHomeLinks() {
     document.querySelectorAll('nav.mobile-bottom-nav').forEach((nav) => {
       const first = nav.querySelector('a:first-child');
@@ -466,25 +474,40 @@
       });
     });
 
-    document.querySelectorAll('a.back-link, a[data-home-link], a[href="/"], a[href="./"], a[href="index.html"], a[href="./index.html"]').forEach((a) => {
+    document.querySelectorAll('a.back-link, a[data-home-link], a[href="/"], a[href="./"], a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"]').forEach((a) => {
       if (!a.getAttribute('href') || a.getAttribute('href') === '#') return;
-      if (a.closest('.pc-sidebar-menu, .pc-top-menu, .mobile-bottom-nav') || a.classList.contains('back-link') || a.hasAttribute('data-home-link')) {
-        a.setAttribute('href', 'index.html');
+      a.setAttribute('href', 'index.html');
+    });
+
+    markHomeLogos();
+  }
+
+  function bindHomeRouting() {
+    const HOME_SELECTOR = 'a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link], [data-home-logo="true"]';
+
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest(HOME_SELECTOR);
+      if (!target) return;
+      if (target.matches('a')) {
+        const href = (target.getAttribute('href') || '').trim();
+        if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
       }
+      event.preventDefault();
+      console.info('[jamgong-nav] home tap detected -> index.html');
+      goHome();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const target = event.target.closest('[data-home-logo="true"]');
+      if (!target) return;
+      event.preventDefault();
+      goHome();
     });
   }
 
   enforceHomeLinks();
-
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link]');
-    if (!link) return;
-    const href = (link.getAttribute('href') || '').trim();
-    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-    event.preventDefault();
-    console.info('[jamgong-nav] home tap detected -> index.html');
-    goHome();
-  });
+  bindHomeRouting();
 
   console.info('[jamgong-nav] mobile home link enforcement active');
 
