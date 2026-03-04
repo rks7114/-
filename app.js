@@ -466,6 +466,17 @@
     });
   }
 
+  function injectInlineHomeOnclick() {
+    const js = "location.href='index.html'";
+    const targets = document.querySelectorAll(
+      'a.back-link, a[data-home-link], a[href="index.html"], a[href="./index.html"], .cta-btn[href="index.html"], nav.mobile-bottom-nav a:first-child, [data-home-logo="true"]'
+    );
+    targets.forEach((el) => {
+      if (el.matches('a')) el.setAttribute('href', 'index.html');
+      el.setAttribute('onclick', js);
+    });
+  }
+
   function enforceHomeLinks() {
     document.querySelectorAll('nav.mobile-bottom-nav').forEach((nav) => {
       const first = nav.querySelector('a:first-child');
@@ -482,6 +493,7 @@
     });
 
     markHomeLogos();
+    injectInlineHomeOnclick();
   }
 
   function bindHomeRouting() {
@@ -513,6 +525,7 @@
     });
   }
 
+  window.jamgongGoHome = goHome;
   enforceHomeLinks();
   bindHomeRouting();
 
