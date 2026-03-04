@@ -452,12 +452,14 @@
 
 
 
-  function goHome() {
-    window.location.assign(new URL('index.html', window.location.href).toString());
+  function goHome(replace = false) {
+    const url = new URL('index.html', window.location.href).toString();
+    if (replace) window.location.replace(url);
+    else window.location.assign(url);
   }
 
   function markHomeLogos() {
-    document.querySelectorAll('.pc-sidebar-title, .hero .eyebrow, .dashboard-hero .eyebrow, .golden-streamline-header h1').forEach((el) => {
+    document.querySelectorAll('.pc-sidebar-title, .hero .eyebrow, .dashboard-hero .eyebrow, .golden-streamline-header h1, .roadmaster-page .header-content h1').forEach((el) => {
       el.setAttribute('data-home-logo', 'true');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
       el.style.cursor = 'pointer';
@@ -485,8 +487,7 @@
   function bindHomeRouting() {
     const HOME_SELECTOR = 'a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link], [data-home-logo="true"]';
 
-    document.addEventListener('click', (event) => {
-      const target = event.target.closest(HOME_SELECTOR);
+    const routeHomeNow = (target, event) => {
       if (!target) return;
       if (target.matches('a')) {
         const href = (target.getAttribute('href') || '').trim();
@@ -494,15 +495,21 @@
       }
       event.preventDefault();
       console.info('[jamgong-nav] home tap detected -> index.html');
-      goHome();
-    });
+      goHome(true);
+    };
+
+    document.addEventListener('pointerup', (event) => {
+      if (event.button !== 0) return;
+      routeHomeNow(event.target.closest(HOME_SELECTOR), event);
+    }, { capture: true });
+
+    document.addEventListener('click', (event) => {
+      routeHomeNow(event.target.closest(HOME_SELECTOR), event);
+    }, { capture: true });
 
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
-      const target = event.target.closest('[data-home-logo="true"]');
-      if (!target) return;
-      event.preventDefault();
-      goHome();
+      routeHomeNow(event.target.closest('[data-home-logo="true"]'), event);
     });
   }
 
