@@ -30,14 +30,10 @@
   }
 
   function bindLanguageSwitchers() {
-    document.querySelectorAll('[data-set-lang]').forEach((btn) => {
-      btn.addEventListener('click', () => applyLang(btn.getAttribute('data-set-lang')));
-    });
-
     document.addEventListener('click', (event) => {
-      const target = event.target.closest('[data-set-lang], [data-lang-set], [data-lang]');
-      if (!target) return;
-      const raw = target.getAttribute('data-set-lang') || target.getAttribute('data-lang-set') || target.getAttribute('data-lang');
+      const trigger = event.target.closest('button[data-set-lang], a[data-set-lang], [role="button"][data-set-lang], button[data-lang-set], a[data-lang-set], [role="button"][data-lang-set], button[data-lang], a[data-lang], [role="button"][data-lang]');
+      if (!trigger) return;
+      const raw = trigger.getAttribute('data-set-lang') || trigger.getAttribute('data-lang-set') || trigger.getAttribute('data-lang');
       if (!raw) return;
       event.preventDefault();
       applyLang(raw);
@@ -484,7 +480,7 @@
     const link = event.target.closest('a[href="index.html"], a[href="./index.html"], a.back-link, a[data-home-link]');
     if (!link) return;
     const href = (link.getAttribute('href') || '').trim();
-    if (!href || href.startsWith('http')) return;
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
     event.preventDefault();
     console.info('[jamgong-nav] home tap detected -> index.html');
     goHome();
